@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" 
+    >
+<FrameLayout
+            android:id="@+id/frameLayout0"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0" >
+        </FrameLayout> 
+    <LinearLayout
+        
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center"
+        android:orientation="horizontal" 
+        
+        >
+
+        <FrameLayout
+            android:id="@+id/frameLayout1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            >
+        </FrameLayout>
+
+        <com.blackcrowsteam.musicstop2.NumberPicker
+            android:id="@+id/pickerHours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:layout_weight="1.0"
+            />
+        
+          <FrameLayout
+            android:id="@+id/frameLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0" >
+        </FrameLayout>
+        
+        <com.blackcrowsteam.musicstop2.NumberPicker
+            android:id="@+id/pickerMinutes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:layout_weight="1.0"
+             />
+       
+
+         <FrameLayout
+            android:id="@+id/frameLayout3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0" >
+        </FrameLayout>   
+ </LinearLayout>
+<FrameLayout
+            android:id="@+id/frameLayout4"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0" >
+        </FrameLayout> 
+        
+    <Button
+        android:id="@+id/btnGo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="btnManager"
+        android:text="@string/btn_go_txt" />
+	
+</LinearLayout>
