@@ -6,9 +6,9 @@ The time can be set with a countdown.
 The stop method can be set in the settings panel to fit with your favorite player.
 
 
-![MusicStop preview](/google-play/init-small.png)
+![MusicStop preview](https://github.com/ragusa87/android-musicStop/raw/master/google-play/init-small.png)
 
-![Settings](/google-play/settings-small.png)
+![Settings](https://github.com/ragusa87/android-musicStop/raw/master/google-play/settings-small.png)
 
 
 Licence
