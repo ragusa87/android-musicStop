@@ -19,3 +19,4 @@ The NumberPicker component come from Android source-code and has been adapted to
 More
 =====
 More informations are available on  [the official website](http://android.blackcrowsteam.com/)
+Or on [Google Play](https://play.google.com/store/apps/details?id=com.blackcrowsteam.musicstop)
