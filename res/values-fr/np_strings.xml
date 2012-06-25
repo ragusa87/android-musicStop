@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="np_number_picker_increment_scroll_mode"><xliff:g id="value" example="3">%s</xliff:g> laissez appuyé.</string>
+    <string name="np_number_picker_increment_scroll_action">Glisser vers le haut pour augmenter ou vers le bas pour diminuer.</string>
+
+    <string name="np_number_picker_increment_button">Augmenter</string>
+    <string name="np_number_picker_decrement_button">Diminuer</string>
+</resources>

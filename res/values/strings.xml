@@ -23,6 +23,7 @@
 	<string name="notify_title">The music will stop</string>
 	<string name="notify_progress">%remaining remaining</string>
 	<string name="notify_start">MusicStop is running for %duration</string>
+		
 	<string name="notify_test">Immediate stop</string>
 	
 	<!--  

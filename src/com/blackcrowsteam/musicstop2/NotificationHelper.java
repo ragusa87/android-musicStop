@@ -56,14 +56,17 @@ public class NotificationHelper {
 		Context context = s.getApplicationContext();
 		
 		Notification notif = notificationFactory(startMsg);
+		notif.flags = Notification.FLAG_ONGOING_EVENT;
+
 		
 		Intent notificationIntent = new Intent(context, StopActivity.class);
-		
+		// Open the app only once
+		notificationIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 		
 		PendingIntent contentIntent = PendingIntent.getActivity(context, 0,
 				notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 		
-		notif.setLatestEventInfo(context, title, message, contentIntent);
+		notif.setLatestEventInfo(context, title, message,contentIntent );
 
 		// Pass the Notification to the NotificationManager:
 		getManager(context).notify(NOTIF_ID, notif);

@@ -21,26 +21,26 @@ package com.blackcrowsteam.musicstop2;
  */
 public class Debug {
 	private static final String LOG_NAME = "MusicStop";
-	private static final Boolean DEBUG = true;
+	private static final Boolean DEBUG = BuildConfig.DEBUG;
 
 	public static class Log {
 		public static void e(String msg) {
-			if (DEBUG)
+			if (DEBUG  && msg != null)
 				android.util.Log.e(LOG_NAME, msg);
 		}
 
 		public static void e(String msg, Throwable tr) {
-			if (DEBUG)
+			if (DEBUG && msg != null)
 				android.util.Log.e(LOG_NAME, msg, tr);
 		}
 
 		public static void v(String msg) {
-			if (DEBUG)
+			if (DEBUG && msg != null)
 				android.util.Log.v(LOG_NAME, msg);
 		}
 
 		public static void v(String msg, Throwable tr) {
-			if (DEBUG)
+			if (DEBUG && msg != null)
 				android.util.Log.v(LOG_NAME, msg, tr);
 		}
 

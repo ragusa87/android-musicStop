@@ -135,4 +135,10 @@ public class TimeConverter {
 		return format(numberOfDays, numberOfHours, numberOfMinutes, numberOfSeconds);
 		
 	}
+	public static boolean isPlurial(int t){
+		return getNumberOfDays(t) >1 ||
+				getNumberOfHours(t) >1 ||
+				getNumberOfMinutes(t) > 1 ||
+				getNumberOfSeconds(t) > 1;
+	}
 }
