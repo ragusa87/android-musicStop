@@ -1,5 +1,3 @@
-package com.blackcrowsteam.musicstop;
-
 /*
  * Copyright 2012 Laurent Constantin <android@blackcrowsteam.com>
  *
@@ -15,16 +13,24 @@ package com.blackcrowsteam.musicstop;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+package com.blackcrowsteam.musicstop;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.SystemClock;
 import android.view.KeyEvent;
 
 /**
- * Usefull procedures to stop the music - Press the MEDIA_PLAY_PAUSE key - Press
- * the MEDIA_STOP key - Plug and un-plug some virtual headset - Un-Plug and plug
- * some virtual headset - Use the ACTION_AUDIO_BECOMING_NOISY functionality (See
- * #android.media.AudioManager)
+ * Useful procedures to stop the music
+ * <ul>
+ * <li>- Press the MEDIA_PLAY_PAUSE key</li>
+ * <li>- Press the MEDIA_STOP key</li>
+ * <li>- Plug and un-plug some virtual headset</li>
+ * <li>- Un-Plug and plug some virtual headset</li>
+ * <li>- Use the ACTION_AUDIO_BECOMING_NOISY functionality (See
+ * #android.media.AudioManager)</li>
+ * </ul>
  * 
  * @author Constantin Laurent
  * 
@@ -70,12 +76,16 @@ public class StopHelper {
 		i2.putExtra("microphone", 0);
 		c.sendBroadcast(i2);
 	}
-/**
- * Stop the music with the selected method
- * @param c Context
- * @param method The selectes method (see array.xml)
- * @return True if the method is known, false otherwise
- */
+
+	/**
+	 * Stop the music with the selected method
+	 * 
+	 * @param c
+	 *            Context
+	 * @param method
+	 *            The selected method (see array.xml)
+	 * @return True if the method is known, false otherwise
+	 */
 	public static boolean stopMusic(Context c, int method) {
 		switch (method) {
 		default:
@@ -100,8 +110,7 @@ public class StopHelper {
 	}
 
 	/**
-	 * Simulation of a handset plug-out and plug-in
-	 * Usefull for songbird
+	 * Simulation of a handset plug-out and plug-in Useful for songbird
 	 */
 	public static void headsetUnPlugAndPlug(Context c) {
 		StopHelper.changeHeadSetState(c, "Simulated-Headset", false);
@@ -110,8 +119,7 @@ public class StopHelper {
 	}
 
 	/**
-	 * Simulation of a handset plug-in and plug-out
-	 * Usefull for songbird
+	 * Simulation of a handset plug-in and plug-out Useful for songbird
 	 */
 	public static void headsetPlugAndUnplug(Context c) {
 		StopHelper.changeHeadSetState(c, "Simulated-Headset", true);

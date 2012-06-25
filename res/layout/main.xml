@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" 
-    >
+    android:orientation="vertical" >
 
     <TextView
         android:id="@+id/textView1"
@@ -17,54 +16,45 @@
         android:layout_height="0dp"
         android:layout_gravity="center"
         android:layout_weight="1"
+        android:gravity="center"
         android:orientation="horizontal" >
 
         <FrameLayout
             android:id="@+id/frameLayout1"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1.0"
-            >
+            android:layout_height="match_parent" >
         </FrameLayout>
 
         <com.blackcrowsteam.musicstop.NumberPicker
             android:id="@+id/pickerHours"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="3dp"
-            android:layout_weight="1.0"
-            />
-        
-          <FrameLayout
+             android:layout_margin="30dp"/>
+
+        <FrameLayout
             android:id="@+id/frameLayout2"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1.0" >
-        </FrameLayout>
-        
+            android:layout_height="match_parent" />
+
         <com.blackcrowsteam.musicstop.NumberPicker
             android:id="@+id/pickerMinutes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="3dp"
-            android:layout_weight="1.0"
-             />
-       
+             android:layout_margin="30dp" />
 
-         <FrameLayout
+        <FrameLayout
             android:id="@+id/frameLayout3"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1.0" >
-        </FrameLayout>   
- </LinearLayout>
+             />
+    </LinearLayout>
+    <!-- android:layout_weight="1.0" -->
 
-        
     <Button
         android:id="@+id/btnGo"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:onClick="btnManager"
         android:text="@string/btn_go_txt" />
-	
+
 </LinearLayout>

@@ -31,7 +31,7 @@
             android:label="@string/prefs_title" >
             <intent-filer>
                 <action android:name=".Preferences" />
-                <category android:name="android.intent.cetagory.PREFERENCE" />
+                <category android:name="android.intent.category.PREFERENCE" />
             </intent-filer>
         </activity>
 

@@ -1,5 +1,3 @@
-package com.blackcrowsteam.musicstop;
-
 /*
  * Copyright 2012 Laurent Constantin <android@blackcrowsteam.com>
  *
@@ -15,6 +13,8 @@ package com.blackcrowsteam.musicstop;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+package com.blackcrowsteam.musicstop;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -35,6 +35,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
 /**
  * Activity used to interact with the stopMusic service. Working in 3 steps :
  * <ul>
@@ -95,24 +96,22 @@ public class StopActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		BUTTON_CANCEL_TEXT =getString(android.R.string.cancel);
+		BUTTON_CANCEL_TEXT = getString(android.R.string.cancel);
 		BUTTON_GO_TEXT = getString(R.string.btn_go_txt);
 
 		pickerHours = (NumberPicker) findViewById(R.id.pickerHours);
 		pickerMin = (NumberPicker) findViewById(R.id.pickerMinutes);
-		
-		
+
 		pickerHours.setMinValue(0);
 		pickerHours.setMaxValue(24);
 		pickerHours.setFocusable(true);
 		pickerHours.setFocusableInTouchMode(true);
-		
-		
+
 		pickerMin.setMinValue(0);
 		pickerMin.setMaxValue(59);
 		pickerMin.setFocusable(true);
 		pickerMin.setFocusableInTouchMode(true);
-		
+
 		switchGoButton();
 	}
 
@@ -140,7 +139,8 @@ public class StopActivity extends Activity {
 		super.onPause();
 		unregisterReceiver(bcr);
 		// Save the timer
-		PrefHelper.setTimer(getApplicationContext(), getDurationCountdown() + "");
+		PrefHelper.setTimer(getApplicationContext(), getDurationCountdown()
+				+ "");
 
 	}
 
@@ -155,7 +155,7 @@ public class StopActivity extends Activity {
 		switch (v.getId()) {
 		case R.id.btnGo:
 			v.requestFocus();
-	
+
 			// START the countdown (or stop it if it's already running)
 			if (isCountdownRunning()) {
 				stopCountdown();
@@ -167,7 +167,7 @@ public class StopActivity extends Activity {
 			Debug.Log.e("NOT IMPLEMENTED");
 			break;
 		}
-	
+
 	}
 
 	/**
@@ -177,41 +177,42 @@ public class StopActivity extends Activity {
 	 * Use the value in strings.xml in case of problems
 	 */
 	private void loadPickers() {
-	
+
 		String timer = "";
 		int time = 0;
 		try {
 			// Load the duration from settings
 			timer = PrefHelper.getTimer(getApplicationContext());
 			time = Integer.valueOf(timer);
-	
+
 		} catch (NumberFormatException f) {
 			// Toast
 			Toast.makeText(getApplicationContext(),
 					getString(R.string.error_bad_kill_time), Toast.LENGTH_LONG)
 					.show();
 			Debug.Log.e("Unable to convert " + timer + " to int", f);
-	
+
 			// Use the value in strings.xml
 			try {
 				time = Integer.valueOf(getString(R.string.kill_time));
 			} catch (NumberFormatException f2) {
 			}
-	
+
 		} catch (Exception e) {
 			Debug.Log.e("LoadPickers exception", e);
 		}
-	
+
 		// Be sure the max-value can be managed by the pickers
 		if (time > MAX_TIMER)
 			time = MAX_TIMER;
-	
+
 		pickerHours.setValue(TimeConverter.getNumberOfHours(time));
 		pickerMin.setValue(TimeConverter.getNumberOfMinutes(time));
 	}
 
 	/**
 	 * Get the duration countdown from the pickers
+	 * 
 	 * @return the duration in seconds
 	 */
 	private int getDurationCountdown() {
@@ -246,6 +247,7 @@ public class StopActivity extends Activity {
 
 	/**
 	 * Get the countdown input and start the countdown service
+	 * 
 	 * @see #startCountdown(int)
 	 */
 	private void startCountdown() {
@@ -254,7 +256,7 @@ public class StopActivity extends Activity {
 		// Parse the user's value
 		try {
 			kill_time = getDurationCountdown();
-	
+
 		} catch (Exception e) {
 			Debug.Log.e("BAD KILL TIME", e);
 			Toast.makeText(getApplicationContext(),
@@ -265,26 +267,26 @@ public class StopActivity extends Activity {
 	}
 
 	/**
-	 * Start the countdown's service for a specified time of seconds
-	 * (starts to count rebourd)
+	 * Start the countdown's service for a specified time of seconds (starts to
+	 * count rebourd)
+	 * 
 	 * @param kill_time
 	 *            Number of seconds for the countdown
 	 */
 	private void startCountdown(int kill_time) {
 		// Debug
 		Debug.Log.v("Starting service! (" + kill_time + ")");
-	
+
 		// Start the countdown service with the specified duration
 		Intent i = new Intent(getApplicationContext(), StopService.class);
 		i.putExtra("duration", kill_time);
 		startService(i);
-	
+
 		switchGoButton();
 	}
 
 	/**
-	 * Cancel the countdown
-	 * The service will stop, but not the music !
+	 * Cancel the countdown The service will stop, but not the music !
 	 */
 	private void stopCountdown() {
 		Toast.makeText(getApplicationContext(),
@@ -313,8 +315,8 @@ public class StopActivity extends Activity {
 	}
 
 	/**
-	 * STOP MUSIC
-	 * Restart the countdown's service for 0 seconds, so the music stops
+	 * STOP MUSIC Restart the countdown's service for 0 seconds, so the music
+	 * stops
 	 */
 	private void stopMusicNow() {
 		startCountdown(0);
@@ -346,15 +348,16 @@ public class StopActivity extends Activity {
 			} catch (NameNotFoundException e) {
 				e.printStackTrace();
 			}
-			
 
 			AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
 			dialogBuilder.setTitle(getString(R.string.menu_about_label));
 			TextView textView = new TextView(this);
 			textView.setMovementMethod(LinkMovementMethod.getInstance());
-			textView.setText(Html.fromHtml(getResources().getString(R.string.about).replace("%ver", version)));
+			textView.setText(Html.fromHtml(getResources().getString(
+					R.string.about).replace("%ver", version)));
 			dialogBuilder.setView(textView);
-			dialogBuilder.setPositiveButton(getString(android.R.string.ok), null).show();
+			dialogBuilder.setPositiveButton(getString(android.R.string.ok),
+					null).show();
 			return true;
 		}
 		return false;

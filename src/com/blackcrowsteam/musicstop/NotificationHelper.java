@@ -1,12 +1,3 @@
-package com.blackcrowsteam.musicstop;
-
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.app.Service;
-import android.content.Context;
-import android.content.Intent;
-
 /*
  * Copyright 2012 Laurent Constantin <android@blackcrowsteam.com>
  *
@@ -22,8 +13,18 @@ import android.content.Intent;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.blackcrowsteam.musicstop;
+
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.Service;
+import android.content.Context;
+import android.content.Intent;
+
 /**
  * Helper to show, update and hide a notification
+ * 
  * @todo Refactor, ugly code there..
  */
 public class NotificationHelper {
@@ -38,48 +39,54 @@ public class NotificationHelper {
 	// new Notification
 	private static Notification notificationFactory(CharSequence startMsg) {
 		int icon = R.drawable.ic_launcher;
-		
+
 		long when = System.currentTimeMillis();
 		return new Notification(icon, startMsg, when);
 	}
 
 	/**
 	 * Show Notification
-	 * @param context Application context
-	 * @param startMsg Ticker texte
-	 * @param title Notification title
-	 * @param message Notification Message
+	 * 
+	 * @param context
+	 *            Application context
+	 * @param startMsg
+	 *            Ticker texte
+	 * @param title
+	 *            Notification title
+	 * @param message
+	 *            Notification Message
 	 */
-	public static void setMessage(Service s, CharSequence startMsg, CharSequence title,
-			CharSequence message) {
-		
+	public static void setMessage(Service s, CharSequence startMsg,
+			CharSequence title, CharSequence message) {
+
 		Context context = s.getApplicationContext();
-		
+
 		Notification notif = notificationFactory(startMsg);
 		notif.flags = Notification.FLAG_ONGOING_EVENT;
 
-		
 		Intent notificationIntent = new Intent(context, StopActivity.class);
 		// Open the app only once
 		notificationIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-		
+
 		PendingIntent contentIntent = PendingIntent.getActivity(context, 0,
 				notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-		
-		notif.setLatestEventInfo(context, title, message,contentIntent );
+
+		notif.setLatestEventInfo(context, title, message, contentIntent);
 
 		// Pass the Notification to the NotificationManager:
 		getManager(context).notify(NOTIF_ID, notif);
 
-		
 		s.startForeground(NOTIF_ID, notif);
-		
+
 	}
+
 	/**
 	 * Remove notification
-	 * @param context Application context
+	 * 
+	 * @param context
+	 *            Application context
 	 */
-	public static void hide(Context context){
+	public static void hide(Context context) {
 		getManager(context).cancel(NOTIF_ID);
 	}
 

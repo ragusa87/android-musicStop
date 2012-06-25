@@ -1,8 +1,3 @@
-package com.blackcrowsteam.musicstop;
-
-import android.os.Bundle;
-import android.preference.PreferenceActivity;
-
 /*
  * Copyright 2012 Laurent Constantin <android@blackcrowsteam.com>
  *
@@ -18,18 +13,25 @@ import android.preference.PreferenceActivity;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+package com.blackcrowsteam.musicstop;
+
+import android.os.Bundle;
+import android.preference.PreferenceActivity;
+
 /**
  * This class is used for the preferences, everything come from a XML.
+ * 
  * @author laurent Constantin
- *
+ * 
  */
 
 public class Preferences extends PreferenceActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);       
-        addPreferencesFromResource(R.xml.preferences);
-    }
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		addPreferencesFromResource(R.xml.preferences);
+	}
 
 }

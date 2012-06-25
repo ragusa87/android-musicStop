@@ -1,4 +1,3 @@
-package com.blackcrowsteam.musicstop;
 /*
  * Copyright 2012 Laurent Constantin <android@blackcrowsteam.com>
  *
@@ -14,60 +13,79 @@ package com.blackcrowsteam.musicstop;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+package com.blackcrowsteam.musicstop;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+
 /**
  * This class is a helper for getting and setting android's preferences
+ * 
  * @author Laurent Constantin
- *
+ * 
  */
 public class PrefHelper {
 	private static int DEFAULT_STOP_METHOD = 1;
+
 	/**
-	 * Get the selected method to stop the music
-	 * Values go from 1 to 4, according to the array.xml file
-	 * @param c Activity's context
+	 * Get the selected method to stop the music Values go from 1 to 4,
+	 * according to the array.xml file
+	 * 
+	 * @param c
+	 *            Activity's context
 	 * @return An integer according to array.xml
 	 */
-	public static int getPrefMethod(Context c){
-			// Choose the correct method from settings
-			SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(c);
-			String s = sharedPrefs.getString("prefMethods", DEFAULT_STOP_METHOD + "");
-			int method = DEFAULT_STOP_METHOD;
-			try{
-				method = Integer.valueOf(s.trim());
-			}catch(NumberFormatException e){
-				Debug.Log.e("BAD METHOD (from prefs)",e);
-				method = -1;
-			}
-			return method;
+	public static int getPrefMethod(Context c) {
+		// Choose the correct method from settings
+		SharedPreferences sharedPrefs = PreferenceManager
+				.getDefaultSharedPreferences(c);
+		String s = sharedPrefs.getString("prefMethods", DEFAULT_STOP_METHOD
+				+ "");
+		int method = DEFAULT_STOP_METHOD;
+		try {
+			method = Integer.valueOf(s.trim());
+		} catch (NumberFormatException e) {
+			Debug.Log.e("BAD METHOD (from prefs)", e);
+			method = -1;
+		}
+		return method;
 	}
+
 	/**
-	 * Save the timer duration 
-	 * @param c Activity's context
-	 * @param timer The countdown duration in seconds (String)
+	 * Save the timer duration
+	 * 
+	 * @param c
+	 *            Activity's context
+	 * @param timer
+	 *            The countdown duration in seconds (String)
 	 */
-	public static void setTimer(Context c, String timer){
+	public static void setTimer(Context c, String timer) {
 		// Save the duration into settings
-		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(c);
+		SharedPreferences sharedPrefs = PreferenceManager
+				.getDefaultSharedPreferences(c);
 		SharedPreferences.Editor ed = sharedPrefs.edit();
 		ed.putString("prefDuration", timer);
-		Debug.Log.v("Saving : "+timer);
+		Debug.Log.v("Saving : " + timer);
 		ed.commit();
-		//ed.apply();
 	}
+
 	/**
 	 * Get the countdown duration from preferences
-	 * @param c Activity's Context
+	 * 
+	 * @param c
+	 *            Activity's Context
 	 * @return The countdown duration in string
 	 */
-	public static String getTimer(Context c){
+	public static String getTimer(Context c) {
 		// Load the duration from settings
-		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(c);
-		String timer = sharedPrefs.getString("prefDuration", c.getString(R.string.kill_time));
-		Debug.Log.v("Loading "+timer);
-		
+		SharedPreferences sharedPrefs = PreferenceManager
+				.getDefaultSharedPreferences(c);
+		String timer = sharedPrefs.getString("prefDuration",
+				c.getString(R.string.kill_time));
+		Debug.Log.v("Loading " + timer);
+
 		return timer;
 	}
 }

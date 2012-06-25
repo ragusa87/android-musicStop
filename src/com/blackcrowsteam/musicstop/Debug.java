@@ -21,7 +21,7 @@ package com.blackcrowsteam.musicstop;
  */
 public class Debug {
 	private static final String LOG_NAME = "MusicStop";
-	private static final Boolean DEBUG = true; //BuildConfig.DEBUG;
+	private static final Boolean DEBUG = BuildConfig.DEBUG;
 
 	public static class Log {
 		public static void e(String msg) {

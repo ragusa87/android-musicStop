@@ -12,6 +12,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
+ * Based on : https://github.com/SimonVT/android-numberpicker
  */
 
 package com.blackcrowsteam.musicstop;
@@ -1909,7 +1911,7 @@ public class NumberPicker extends LinearLayout {
      */
     class InputTextFilter extends NumberKeyListener {
 
-        // XXX This doesn't allow for range limits when controlled by a
+        // This doesn't allow for range limits when controlled by a
         // soft input method!
         public int getInputType() {
             return InputType.TYPE_CLASS_TEXT;
