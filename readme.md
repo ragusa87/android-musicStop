@@ -14,4 +14,8 @@ The stop method can be set in the settings panel to fit with your favorite playe
 Licence
 ============
 The source is under Apache 2.0 Licence.
-The NumberPicket come from the android source and has been adapted to work on android 2.1 by [SimonVT](https://github.com/SimonVT/android-numberpicker)
+The NumberPicker component come from Android source-code and has been adapted to work on android 2.1 by [SimonVT](https://github.com/SimonVT/android-numberpicker)
+
+More
+=====
+More informations are available on  [the official website](http://android.blackcrowsteam.com/)
