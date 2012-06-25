@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.blackcrowsteam.musicstop2;
+package com.blackcrowsteam.musicstop;
 
 import android.content.Context;
 import android.hardware.SensorManager;

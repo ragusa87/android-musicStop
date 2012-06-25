@@ -1,4 +1,4 @@
-package com.blackcrowsteam.musicstop2;
+package com.blackcrowsteam.musicstop;
 
 import android.app.Activity;
 import android.os.Bundle;

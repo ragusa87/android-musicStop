@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.blackcrowsteam.musicstop2;
+package com.blackcrowsteam.musicstop;
 
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorListenerAdapter;

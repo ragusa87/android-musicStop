@@ -1,4 +1,4 @@
-package com.blackcrowsteam.musicstop2;
+package com.blackcrowsteam.musicstop;
 /*
  * Copyright 2012 Laurent Constantin <android@blackcrowsteam.com>
  *
@@ -65,7 +65,7 @@ public class PrefHelper {
 	public static String getTimer(Context c){
 		// Load the duration from settings
 		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(c);
-		String timer = sharedPrefs.getString("prefDuration", "10");
+		String timer = sharedPrefs.getString("prefDuration", c.getString(R.string.kill_time));
 		Debug.Log.v("Loading "+timer);
 		
 		return timer;

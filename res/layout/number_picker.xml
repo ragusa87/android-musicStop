@@ -25,7 +25,7 @@
         style="?attr/numberPickerUpButtonStyle"
         android:contentDescription="@string/np_number_picker_increment_button" />
 
-    <view class="com.blackcrowsteam.musicstop2.NumberPicker$CustomEditText"
+    <view class="com.blackcrowsteam.musicstop.NumberPicker$CustomEditText"
         android:id="@+id/np_numberpicker_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

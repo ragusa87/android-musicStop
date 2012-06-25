@@ -4,21 +4,20 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" 
     >
-<FrameLayout
-            android:id="@+id/frameLayout0"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1.0" >
-        </FrameLayout> 
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_intro" />
+
     <LinearLayout
-        
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|center"
-        android:orientation="horizontal" 
-        
-        >
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
 
         <FrameLayout
             android:id="@+id/frameLayout1"
@@ -28,7 +27,7 @@
             >
         </FrameLayout>
 
-        <com.blackcrowsteam.musicstop2.NumberPicker
+        <com.blackcrowsteam.musicstop.NumberPicker
             android:id="@+id/pickerHours"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -43,7 +42,7 @@
             android:layout_weight="1.0" >
         </FrameLayout>
         
-        <com.blackcrowsteam.musicstop2.NumberPicker
+        <com.blackcrowsteam.musicstop.NumberPicker
             android:id="@+id/pickerMinutes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -59,12 +58,7 @@
             android:layout_weight="1.0" >
         </FrameLayout>   
  </LinearLayout>
-<FrameLayout
-            android:id="@+id/frameLayout4"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1.0" >
-        </FrameLayout> 
+
         
     <Button
         android:id="@+id/btnGo"

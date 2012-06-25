@@ -1,4 +1,4 @@
-package com.blackcrowsteam.musicstop2;
+package com.blackcrowsteam.musicstop;
 
 /*
  * Copyright 2012 Laurent Constantin <android@blackcrowsteam.com>
@@ -19,15 +19,21 @@ package com.blackcrowsteam.musicstop2;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningServiceInfo;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 /**
  * Activity used to interact with the stopMusic service. Working in 3 steps :
@@ -43,7 +49,7 @@ public class StopActivity extends Activity {
 	/**
 	 * Action broadcasted when the countdown is over
 	 */
-	public final static String BROADCAST_STOP_ACTION = "com.blackcrowsteam.musicstop2.STOP";
+	public final static String BROADCAST_STOP_ACTION = "com.blackcrowsteam.musicstop.STOP";
 
 	/**
 	 * The maximum value who can be used for the countdown 23:59:59 hours in
@@ -89,7 +95,7 @@ public class StopActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		BUTTON_CANCEL_TEXT = getString(R.string.btn_cancel_txt);
+		BUTTON_CANCEL_TEXT =getString(android.R.string.cancel);
 		BUTTON_GO_TEXT = getString(R.string.btn_go_txt);
 
 		pickerHours = (NumberPicker) findViewById(R.id.pickerHours);
@@ -330,6 +336,25 @@ public class StopActivity extends Activity {
 		case R.id.menuitem_pref:
 			startActivity(new Intent(this.getApplicationContext(),
 					Preferences.class));
+			return true;
+		case R.id.menuitem_about:
+			PackageInfo pInfo;
+			String version = getString(R.string.app_name);
+			try {
+				pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+				version += " " + pInfo.versionName + "<br>";
+			} catch (NameNotFoundException e) {
+				e.printStackTrace();
+			}
+			
+
+			AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+			dialogBuilder.setTitle(getString(R.string.menu_about_label));
+			TextView textView = new TextView(this);
+			textView.setMovementMethod(LinkMovementMethod.getInstance());
+			textView.setText(Html.fromHtml(getResources().getString(R.string.about).replace("%ver", version)));
+			dialogBuilder.setView(textView);
+			dialogBuilder.setPositiveButton(getString(android.R.string.ok), null).show();
 			return true;
 		}
 		return false;

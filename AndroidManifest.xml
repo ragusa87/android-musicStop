@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.blackcrowsteam.musicstop2"
+    package="com.blackcrowsteam.musicstop"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -11,8 +11,8 @@
         android:label="@string/app_name" >
 
         <activity
-            android:name="com.blackcrowsteam.musicstop2.StopActivity"
-            android:theme="@style/SampleTheme2" 
+            android:name="com.blackcrowsteam.musicstop.StopActivity"
+            android:theme="@style/scroller" 
             android:label="@string/app_name" 
             
             >
@@ -23,20 +23,19 @@
             </intent-filter>
             
             <intent-filter>
-                <action android:name="com.blackcrowsteam.musicstop2.STOP" />
+                <action android:name="com.blackcrowsteam.musicstop.STOP" />
             </intent-filter>
         </activity>
         <activity
-            android:theme="@style/SampleTheme2" 
-            android:name="com.blackcrowsteam.musicstop2.Preferences"
-            android:label="Prefs" >
+            android:name=".Preferences"
+            android:label="@string/prefs_title" >
             <intent-filer>
                 <action android:name=".Preferences" />
                 <category android:name="android.intent.cetagory.PREFERENCE" />
             </intent-filer>
         </activity>
 
-        <service android:name="com.blackcrowsteam.musicstop2.StopService" >
+        <service android:name=".StopService" >
         </service>
         
     </application>

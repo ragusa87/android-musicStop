@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Music Stop2</string>
-	<string name="kill_time">5</string>
+    <string name="app_name">Music Stop</string>
+    <string name="prefs_title">Paramètres</string>
+	<string name="kill_time">900</string>
 	<string name="btn_go_txt">Démarrer le compte à rebours</string>
-	<string name="btn_cancel_txt">Annuler</string>
 	
-	
+	<string name="txt_intro">La musique s\'arrêtrera à la fin du compte à rebours</string>
+	<string name="about">Laurent Constantin&lt;br>&lt;a href=\"http://android.blackcrowsteam.com\">%ver&lt;/a></string>
+		
 	<string name="numberPickerHint">Temps en secondes avant l\'arrêt de la musique</string>
 	<string name="menu_test_label">Arrêter maintenant</string>
 	<string name="menu_pref_label">Paramètres</string>
+	<string name="menu_about_label">A Propos</string>
 	
+		
 	<string name="action_cancel">Compte à rebours annulé!</string>
 	<string name="action_stopped">Musique arrêtée!</string>
 	<string name="error_bad_method">Méthode invalide. Utilisation de la méthode par défaut!</string>

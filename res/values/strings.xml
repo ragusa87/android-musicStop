@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Music Stop2</string>
-	<string name="kill_time">5</string>
+    <string name="app_name">Music Stop</string>
+    <string name="prefs_title">Settings</string>
+    <string name="kill_time">900</string>
 	<string name="btn_go_txt">Start the countdown</string>
-	<string name="btn_cancel_txt">Cancel</string>
 	
+	<string name="txt_intro">The music will stop when the countdown is over</string>
+	<string name="about">Laurent Constantin&lt;br>&lt;a href=\"http://android.blackcrowsteam.com\">%ver&lt;/a></string>
+		
 	
 	<string name="numberPickerHint">Time in second before stopping the music</string>
 	<string name="menu_test_label">Stop the music now</string>
 	<string name="menu_pref_label">Settings</string>
+	<string name="menu_about_label">About</string>
 	
 	<string name="action_cancel">Countdown cancelled!</string>
 	<string name="action_stopped">Music Stopped!</string>
@@ -46,7 +50,7 @@
 	</string-array>
 	
 	<string name="pref_method_title">Method to stop music</string>
-	<string name="pref_method_pickup">Pick your favorite stop method</string>
+	<string name="pref_method_pickup">Favorite stop method</string>
 	<string name="pref_killtime_title">Default countdown duration</string>
 	<string name="pref_killtime_pickup">Duration (in seconds)</string>
 		

@@ -1,4 +1,4 @@
-package com.blackcrowsteam.musicstop2;
+package com.blackcrowsteam.musicstop;
 /*
  * Copyright 2012 Laurent Constantin <android@blackcrowsteam.com>
  *
