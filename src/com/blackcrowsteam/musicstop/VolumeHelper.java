@@ -30,8 +30,6 @@ public class VolumeHelper {
 	public static synchronized void setMediaVolume(Context c, int volume){
 		init(c);
 		audio.setStreamVolume(AudioManager.STREAM_MUSIC,volume,AudioManager.FLAG_SHOW_UI);
-		Debug.Log.v("Set volume to : " + volume);
-
 	}
 	/**
 	 * Mute the volume in a loop.
@@ -40,7 +38,6 @@ public class VolumeHelper {
 	 * @return Initial volume
 	 */
 	public static synchronized int muteMediaVolume(Context c){
-		Debug.Log.v("MUTE!");
 		final int STEP = 5;
 		final int v = getMediaVolume(c);
 		int z = v;

@@ -202,7 +202,6 @@ public class StopService extends Service {
 	 * service Then the countdown service stop
 	 */
 	private void terminate() {
-		Debug.Log.v("StopSelf");
 		mustRun = false;
 		int volume = VolumeHelper.getMediaVolume(getApplicationContext());
 		boolean fadein = PrefHelper.getFadeIn(getApplicationContext());
@@ -212,10 +211,8 @@ public class StopService extends Service {
 			
 			// Fade-in
 			if(fadein){
-				Debug.Log.v("FADE-IN");
 				VolumeHelper.muteMediaVolume(getApplicationContext());
 			}
-			Debug.Log.v("STOP");
 
 			// STOP
 			if (!StopHelper.stopMusic(getApplicationContext(), method)) {
@@ -228,7 +225,6 @@ public class StopService extends Service {
 		// Restore volume
 
 		if(fadein){
-			Debug.Log.v("RESTOR");
 			VolumeHelper.sleep(1000);
 			VolumeHelper.setMediaVolume(getApplicationContext(), volume);
 		}
