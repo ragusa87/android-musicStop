@@ -20,7 +20,7 @@ public class VolumeHelper {
 	 */
 	public static synchronized int getMediaVolume(Context c){
 		init(c);
-		return audio.getStreamVolume(audio.STREAM_MUSIC);
+		return audio.getStreamVolume(AudioManager.STREAM_MUSIC);
 	}
 	/**
 	 * Set media volume
@@ -29,7 +29,7 @@ public class VolumeHelper {
 	 */
 	public static synchronized void setMediaVolume(Context c, int volume){
 		init(c);
-		audio.setStreamVolume(audio.STREAM_MUSIC,volume,AudioManager.FLAG_SHOW_UI);
+		audio.setStreamVolume(AudioManager.STREAM_MUSIC,volume,AudioManager.FLAG_SHOW_UI);
 		Debug.Log.v("Set volume to : " + volume);
 
 	}

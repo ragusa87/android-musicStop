@@ -53,5 +53,5 @@
 	<string name="pref_method_pickup">Favorite stop method</string>
 	<string name="pref_killtime_title">Default countdown duration</string>
 	<string name="pref_killtime_pickup">Duration (in seconds)</string>
-	<string name="pref_method_fadein">Fade volume</string>
+	<string name="pref_method_fadein">Fade volume out</string>
 </resources>

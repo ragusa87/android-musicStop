@@ -109,6 +109,7 @@ public class StopHelper {
 		return true;
 	}
 
+
 	/**
 	 * Simulation of a handset plug-out and plug-in Useful for songbird
 	 */
