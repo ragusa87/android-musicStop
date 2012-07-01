@@ -54,5 +54,6 @@
 	<string name="pref_method_pickup">Méthode favorite</string>
 	<string name="pref_killtime_title">Temps du compte à rebours par défaut</string>
 	<string name="pref_killtime_pickup">Durée (en secondes)</string>
-		
+	<string name="pref_method_fadein">Fondu du volume</string>
+	
 </resources>

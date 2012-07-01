@@ -10,6 +10,11 @@
             android:entryValues="@array/prefListValues"
             android:key="prefMethods"
             android:title="@string/pref_method_pickup" />
+        <CheckBoxPreference
+            android:defaultValue="1"
+            android:key="prefFadein"
+            android:title="@string/pref_method_fadein"
+        />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/pref_killtime_title" >
         <EditTextPreference

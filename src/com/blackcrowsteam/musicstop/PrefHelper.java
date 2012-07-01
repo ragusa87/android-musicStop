@@ -88,4 +88,13 @@ public class PrefHelper {
 
 		return timer;
 	}
+	
+	public static boolean getFadeIn(Context c){
+		// Load the checkbox from settings
+		SharedPreferences sharedPrefs = PreferenceManager
+				.getDefaultSharedPreferences(c);
+		Boolean fadein = sharedPrefs.getBoolean("prefFadein", true);
+		Debug.Log.v("Loading pref fade-in: " + fadein);
+		return fadein;	
+	}
 }

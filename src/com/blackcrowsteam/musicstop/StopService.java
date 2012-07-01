@@ -41,6 +41,8 @@ public class StopService extends Service {
 	private int duration = DEFAULT_DURATION;
 	// Overwritten on each timer's tick
 	private int remaining = 0;
+	// Disable the service
+	private boolean mustRun = true;
 	// String used for notifications.
 	// Use %duration for the duration time
 	// Use %remaining for the remaining time
@@ -139,6 +141,7 @@ public class StopService extends Service {
 		// We started a new Countdown
 		tickCount = 0;
 		remaining = duration;
+		mustRun =true;
 
 		String notif_start = format(NOTIF_START);
 		if (duration == 0)
@@ -161,11 +164,20 @@ public class StopService extends Service {
 	 */
 	private class mainTask extends TimerTask {
 		public void run() {
+			if(!mustRun)
+				return;
+			
+			Debug.Log.v("TICK!");
 			// Time's UP
 			if (tickCount >= duration) {
 				Debug.Log.v("Timer Stop");
-
+				this.cancel();
 				terminate();
+				
+				// Stop the service
+				stopSelf();
+				
+				
 			} else {
 				// Number of remaining seconds before time's up
 				remaining = duration - tickCount;
@@ -191,8 +203,21 @@ public class StopService extends Service {
 	 */
 	private void terminate() {
 		Debug.Log.v("StopSelf");
+		mustRun = false;
+		int volume = VolumeHelper.getMediaVolume(getApplicationContext());
+		boolean fadein = PrefHelper.getFadeIn(getApplicationContext());
+
 		try {
 			int method = PrefHelper.getPrefMethod(getApplicationContext());
+			
+			// Fade-in
+			if(fadein){
+				Debug.Log.v("FADE-IN");
+				VolumeHelper.muteMediaVolume(getApplicationContext());
+			}
+			Debug.Log.v("STOP");
+
+			// STOP
 			if (!StopHelper.stopMusic(getApplicationContext(), method)) {
 				Debug.Log.e("Unknow stop method");
 			}
@@ -200,7 +225,14 @@ public class StopService extends Service {
 		} catch (Exception e) {
 			Debug.Log.e("Cant stop MUSIC !", e);
 		}
+		// Restore volume
 
+		if(fadein){
+			Debug.Log.v("RESTOR");
+			VolumeHelper.sleep(1000);
+			VolumeHelper.setMediaVolume(getApplicationContext(), volume);
+		}
+		
 		try {
 			Intent i = new Intent(StopActivity.BROADCAST_STOP_ACTION);
 			sendBroadcast(i);
@@ -209,7 +241,6 @@ public class StopService extends Service {
 			Debug.Log.e("Cant send STOP event", e);
 		}
 
-		// Stop the service
-		stopSelf();
+
 	}
 }
