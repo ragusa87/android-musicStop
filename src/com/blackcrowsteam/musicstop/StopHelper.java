@@ -90,26 +90,28 @@ public class StopHelper {
 		switch (method) {
 		default:
 			return false;
-		case 1:
+
+		case 1: // Stop
 			StopHelper.sendStopKey(c);
 			break;
-		case 2:
+		case 2: // Play pause
 			StopHelper.sendPlayPauseKey(c);
 			break;
-		case 3:
+		case 3: // plugin and plugout
 			StopHelper.headsetPlugAndUnplug(c);
 			break;
-		case 4:
+		case 4: // plugout and plugin
 			StopHelper.headsetUnPlugAndPlug(c);
 			break;
-		case 5:
+		case 5: // Getting Noisy
 			StopHelper.audioBecomingNoisy(c);
+			break;
+		case 6: // Mute
+			VolumeHelper.setMediaVolume(c,0);
 			break;
 		}
 		return true;
 	}
-
-
 	/**
 	 * Simulation of a handset plug-out and plug-in Useful for songbird
 	 */

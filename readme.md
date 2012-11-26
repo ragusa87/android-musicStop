@@ -1,12 +1,14 @@
-# ![Icon](https://raw.github.com/ragusa87/android-musicStop/master/google-play/icon.png "Music Stop") #
+# Readme #
+![Icon](https://raw.github.com/ragusa87/android-musicStop/master/google-play/icon.png "Music Stop")
 
-Music Stop allow you to stop your music player after a defined time. The stop method can be customized to fit with your favorite player.
+Music Stop allows you to stop your music player after a defined time. The stop method can be customized to fit with your favorite player.
 
 * <b>Stop :</b> Press on a virtual "Stop" button (Default)
 * <b>Play/Pause :</b> Press on a virtual "Play/Pause" button
 * <b>Headphone plug-in and plug-out :</b> Plug your headphone and unplug them to stop the music. (Use if disconnected)
 * <b>Headphone plug-out and plug-in :</b> Unplug your headphone to stop the music and plug them back.(Use if connected)
 * <b>Getting noisy :</b> Simulate unplug from a docking station.
+* <b>Mute :</b>Mute volume. This action doesn't stop the music and use more battery. You restore volume by pressing the volume up key or via "System settings" -> "Sound" -> "Volumes".
 
 # Screenshots #
 ![MusicStop preview](https://github.com/ragusa87/android-musicStop/raw/master/google-play/init-small.png "Main screen")
@@ -14,7 +16,7 @@ Music Stop allow you to stop your music player after a defined time. The stop me
 ![Settings](https://github.com/ragusa87/android-musicStop/raw/master/google-play/settings-small.png "Settings")
 
 # Supported Players #
-This application simulate the "stop" button to stop the music. It should work with any music player.
+This application simulates the "stop" button to stop the music. It should work with any music player.
 ## Out-of-the-box ##
 * Google Music
 * Built-in player (Samsung, HTC,..)
@@ -28,7 +30,7 @@ For theses players, edit the settings and check "headsets controls".
 * Winamp
 
 ## Not Working ##
-Theses players have been reported as incompatible with this application. You should try different stop methods to make them work (or use another player). Usually, streaming player are not working (radio/cloud).
+Theses players have been reported as incompatible with this application. You should try different stop methods to make them work (or use another player). Usually, streaming players are not working (radio/cloud).
 
 * Spotify
 * Skyrock
@@ -38,7 +40,7 @@ This application is available on [Google Play](https://play.google.com/store/app
 
 # Team #
 <p><b>Laurent Constantin</b> Developper.</p>
-<p><b>Cyril Friederich</b> Designer.</p>
+<p><b>Cyril Friederich</b> Logo designer.</p>
 
 You can contact us using [my email address](mailto:constantin.laurent@gmail.com)
 

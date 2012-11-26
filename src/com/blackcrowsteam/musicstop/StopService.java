@@ -205,16 +205,16 @@ public class StopService extends Service {
 		mustRun = false;
 		int volume = VolumeHelper.getMediaVolume(getApplicationContext());
 		boolean fadein = PrefHelper.getFadeIn(getApplicationContext());
+		int method = PrefHelper.getPrefMethod(getApplicationContext());
 
 		try {
-			int method = PrefHelper.getPrefMethod(getApplicationContext());
 			
 			// Fade-in
 			if(fadein){
 				VolumeHelper.muteMediaVolume(getApplicationContext());
 			}
 
-			// STOP
+			// STOP MUSIC
 			if (!StopHelper.stopMusic(getApplicationContext(), method)) {
 				Debug.Log.e("Unknow stop method");
 			}
@@ -222,9 +222,8 @@ public class StopService extends Service {
 		} catch (Exception e) {
 			Debug.Log.e("Cant stop MUSIC !", e);
 		}
-		// Restore volume
-
-		if(fadein){
+		// Restore volume (except if method is mute)
+		if(fadein && method != 6){
 			VolumeHelper.sleep(1000);
 			VolumeHelper.setMediaVolume(getApplicationContext(), volume);
 		}

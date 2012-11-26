@@ -6,7 +6,7 @@
 	<string name="btn_go_txt">Démarrer le compte à rebours</string>
 	
 	<string name="txt_intro">La musique s\'arrêtera à la fin du compte à rebours</string>
-	<string name="about">Laurent Constantin&lt;br>&lt;a href=\"http://android.blackcrowsteam.com\">%ver&lt;/a></string>
+	<string name="about">Laurent Constantin&lt;br>&lt;a href=\"https://github.com/ragusa87/android-musicStop#readme\">%ver&lt;/a></string>
 		
 	<string name="numberPickerHint">Temps en secondes avant l\'arrêt de la musique</string>
 	<string name="menu_test_label">Arrêter maintenant</string>
