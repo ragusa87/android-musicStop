@@ -3,3 +3,4 @@ project.properties
 gen/*
 bin/*
 .DS_Store
+*/.DS_Store
