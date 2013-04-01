@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Music Stop</string>
+    <string name="app_name"  translatable="false">Music Stop</string>
+    <string name="app_author" translatable="false">Constantin Laurent</string>
+    <string name="kill_time"  translatable="false">900</string>
+     <string name="about_site_url" translatable="false">https://github.com/ragusa87/android-musicStop</string>
+    
     <string name="prefs_title">Settings</string>
-    <string name="kill_time">900</string>
 	<string name="btn_go_txt">Start the countdown</string>
 	
 	<string name="txt_intro">The music will stop when the countdown is over</string>
-	<string name="about">Laurent Constantin&lt;br>&lt;a href=\"https://github.com/ragusa87/android-musicStop#readme\">%ver&lt;/a></string>
 		
-	
 	<string name="numberPickerHint">Time in second before stopping the music</string>
 	<string name="menu_test_label">Stop the music now</string>
 	<string name="menu_pref_label">Settings</string>
-	<string name="menu_about_label">About</string>
 	
+    <!-- A Propos -->
+    <string name="about_site">Website</string>
+    <string name="about_licence">Licence</string>
+   	<string name="about_label">About</string>
+    
 	<string name="action_cancel">Countdown cancelled!</string>
 	<string name="action_stopped">Music Stopped!</string>
 	<string name="error_bad_method">Invalid method. Using the default one!</string>

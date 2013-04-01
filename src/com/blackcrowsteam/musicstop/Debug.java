@@ -17,6 +17,7 @@ package com.blackcrowsteam.musicstop;
 
 /**
  * Log only if DEBUG is enabled
+ * 
  * @author Constantin Laurent
  */
 public class Debug {
@@ -25,7 +26,7 @@ public class Debug {
 
 	public static class Log {
 		public static void e(String msg) {
-			if (DEBUG  && msg != null)
+			if (DEBUG && msg != null)
 				android.util.Log.e(LOG_NAME, msg);
 		}
 

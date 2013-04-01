@@ -22,6 +22,7 @@
     <attr name="numberPickerInputTextStyle" format="reference" />
 
     <declare-styleable name="NumberPicker">
+
         <!-- @hide Color for the solid color background if such for optimized rendering. -->
         <attr name="solidColor" format="color|reference" />
         <!-- @hide Whether the number picker supports fligning. -->
@@ -64,11 +65,9 @@
         <item name="android:maxHeight">200dip</item>
     </style>
 
-    <style name="NPWidget.Holo.Light.NumberPicker" parent="NPWidget.Holo.NumberPicker">
-    </style>
+    <style name="NPWidget.Holo.Light.NumberPicker" parent="NPWidget.Holo.NumberPicker"></style>
 
-    <style name="NPWidget.Holo.Light.EditText.NumberPickerInputText" parent="NPWidget.Holo.EditText.NumberPickerInputText">
-    </style>
+    <style name="NPWidget.Holo.Light.EditText.NumberPickerInputText" parent="NPWidget.Holo.EditText.NumberPickerInputText"></style>
 
     <style name="NPWidget.Holo.Light.ImageButton.NumberPickerUpButton" parent="NPWidget.Holo.ImageButton.NumberPickerUpButton">
         <item name="android:src">@drawable/np_numberpicker_up_btn_holo_light</item>
@@ -89,8 +88,7 @@
         <item name="android:background">@null</item>
     </style>
 
-    <style name="NPWidget.Holo.EditText" parent="NPWidget.EditText">
-    </style>
+    <style name="NPWidget.Holo.EditText" parent="NPWidget.EditText"></style>
 
     <style name="NPWidget.EditText">
         <item name="android:focusable">true</item>
@@ -116,7 +114,7 @@
     </style>
 
     <style name="NPWidget.Holo.ImageButton" parent="NPWidget.ImageButton">
-        <!--item name="android:background">@android:drawable/btn_default_holo_dark</item-->
+        <!-- item name="android:background">@android:drawable/btn_default_holo_dark</item -->
     </style>
 
     <style name="NPWidget.ImageButton">
@@ -125,4 +123,5 @@
         <item name="android:scaleType">center</item>
         <item name="android:background">@android:drawable/btn_default</item>
     </style>
+
 </resources>

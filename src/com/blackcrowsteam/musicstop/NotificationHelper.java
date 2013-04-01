@@ -47,14 +47,10 @@ public class NotificationHelper {
 	/**
 	 * Show Notification
 	 * 
-	 * @param context
-	 *            Application context
-	 * @param startMsg
-	 *            Ticker texte
-	 * @param title
-	 *            Notification title
-	 * @param message
-	 *            Notification Message
+	 * @param context Application context
+	 * @param startMsg Ticker texte
+	 * @param title Notification title
+	 * @param message Notification Message
 	 */
 	public static void setMessage(Service s, CharSequence startMsg,
 			CharSequence title, CharSequence message) {
@@ -83,8 +79,7 @@ public class NotificationHelper {
 	/**
 	 * Remove notification
 	 * 
-	 * @param context
-	 *            Application context
+	 * @param context Application context
 	 */
 	public static void hide(Context context) {
 		getManager(context).cancel(NOTIF_ID);

@@ -18,6 +18,8 @@
 
 package com.blackcrowsteam.musicstop;
 
+import java.util.Locale;
+
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.AnimatorListenerAdapter;
 import com.nineoldandroids.animation.AnimatorSet;
@@ -461,12 +463,9 @@ public class NumberPicker extends LinearLayout {
 		/**
 		 * Called upon a change of the current value.
 		 * 
-		 * @param picker
-		 *            The NumberPicker associated with this listener.
-		 * @param oldVal
-		 *            The previous value.
-		 * @param newVal
-		 *            The new value.
+		 * @param picker The NumberPicker associated with this listener.
+		 * @param oldVal The previous value.
+		 * @param newVal The new value.
 		 */
 		void onValueChange(NumberPicker picker, int oldVal, int newVal);
 	}
@@ -496,13 +495,10 @@ public class NumberPicker extends LinearLayout {
 		/**
 		 * Callback invoked while the number picker scroll state has changed.
 		 * 
-		 * @param view
-		 *            The view whose scroll state is being reported.
-		 * @param scrollState
-		 *            The current scroll state. One of
-		 *            {@link #SCROLL_STATE_IDLE},
-		 *            {@link #SCROLL_STATE_TOUCH_SCROLL} or
-		 *            {@link #SCROLL_STATE_IDLE}.
+		 * @param view The view whose scroll state is being reported.
+		 * @param scrollState The current scroll state. One of
+		 * {@link #SCROLL_STATE_IDLE}, {@link #SCROLL_STATE_TOUCH_SCROLL} or
+		 * {@link #SCROLL_STATE_IDLE}.
 		 */
 		public void onScrollStateChange(NumberPicker view, int scrollState);
 	}
@@ -515,8 +511,7 @@ public class NumberPicker extends LinearLayout {
 		/**
 		 * Formats a string representation of the current value.
 		 * 
-		 * @param value
-		 *            The currently selected value.
+		 * @param value The currently selected value.
 		 * @return A formatted string representation.
 		 */
 		public String format(int value);
@@ -525,8 +520,7 @@ public class NumberPicker extends LinearLayout {
 	/**
 	 * Create a new number picker.
 	 * 
-	 * @param context
-	 *            The application environment.
+	 * @param context The application environment.
 	 */
 	public NumberPicker(Context context) {
 		this(context, null);
@@ -535,10 +529,8 @@ public class NumberPicker extends LinearLayout {
 	/**
 	 * Create a new number picker.
 	 * 
-	 * @param context
-	 *            The application environment.
-	 * @param attrs
-	 *            A collection of attributes.
+	 * @param context The application environment.
+	 * @param attrs A collection of attributes.
 	 */
 	public NumberPicker(Context context, AttributeSet attrs) {
 		this(context, attrs, R.attr.numberPickerStyle);
@@ -547,12 +539,9 @@ public class NumberPicker extends LinearLayout {
 	/**
 	 * Create a new number picker
 	 * 
-	 * @param context
-	 *            the application environment.
-	 * @param attrs
-	 *            a collection of attributes.
-	 * @param defStyle
-	 *            The default style to apply to this view.
+	 * @param context the application environment.
+	 * @param attrs a collection of attributes.
+	 * @param defStyle The default style to apply to this view.
 	 */
 	public NumberPicker(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs);
@@ -860,7 +849,7 @@ public class NumberPicker extends LinearLayout {
 				hideInputControls();
 				return true;
 			}
-			break;
+		break;
 		}
 		return false;
 	}
@@ -890,7 +879,7 @@ public class NumberPicker extends LinearLayout {
 			scrollBy(0, deltaMoveY);
 			invalidate();
 			mLastMotionEventY = currentMoveY;
-			break;
+		break;
 		case MotionEvent.ACTION_UP:
 			if (mCheckBeginEditOnUpEvent) {
 				mCheckBeginEditOnUpEvent = false;
@@ -929,7 +918,7 @@ public class NumberPicker extends LinearLayout {
 			mVelocityTracker.recycle();
 			mVelocityTracker = null;
 			mLastUpEventTimeMillis = ev.getEventTime();
-			break;
+		break;
 		}
 		return true;
 	}
@@ -943,11 +932,11 @@ public class NumberPicker extends LinearLayout {
 				removeAllCallbacks();
 				forceCompleteChangeCurrentByOneViaScroll();
 			}
-			break;
+		break;
 		case MotionEvent.ACTION_CANCEL:
 		case MotionEvent.ACTION_UP:
 			removeAllCallbacks();
-			break;
+		break;
 		}
 		return super.dispatchTouchEvent(event);
 	}
@@ -1051,8 +1040,7 @@ public class NumberPicker extends LinearLayout {
 	/**
 	 * Sets the listener to be notified on change of the current value.
 	 * 
-	 * @param onValueChangedListener
-	 *            The listener.
+	 * @param onValueChangedListener The listener.
 	 */
 	public void setOnValueChangedListener(
 			OnValueChangeListener onValueChangedListener) {
@@ -1062,8 +1050,7 @@ public class NumberPicker extends LinearLayout {
 	/**
 	 * Set listener to be notified for scroll state changes.
 	 * 
-	 * @param onScrollListener
-	 *            The listener.
+	 * @param onScrollListener The listener.
 	 */
 	public void setOnScrollListener(OnScrollListener onScrollListener) {
 		mOnScrollListener = onScrollListener;
@@ -1076,10 +1063,8 @@ public class NumberPicker extends LinearLayout {
 	 * formatter is never invoked.
 	 * </p>
 	 * 
-	 * @param formatter
-	 *            The formatter object. If formatter is <code>null</code>,
-	 *            {@link String#valueOf(int)} will be used.
-	 * 
+	 * @param formatter The formatter object. If formatter is <code>null</code>,
+	 * {@link String#valueOf(int)} will be used.
 	 * @see #setDisplayedValues(String[])
 	 */
 	public void setFormatter(Formatter formatter) {
@@ -1114,8 +1099,7 @@ public class NumberPicker extends LinearLayout {
 	 * current value is set to the {@link NumberPicker#getMinValue()} value.
 	 * </p>
 	 * 
-	 * @param value
-	 *            The current value.
+	 * @param value The current value.
 	 * @see #setWrapSelectorWheel(boolean)
 	 * @see #setMinValue(int)
 	 * @see #setMaxValue(int)
@@ -1187,7 +1171,6 @@ public class NumberPicker extends LinearLayout {
 	 * Gets whether the selector wheel wraps when reaching the min/max value.
 	 * 
 	 * @return True if the selector wheel wraps.
-	 * 
 	 * @see #getMinValue()
 	 * @see #getMaxValue()
 	 */
@@ -1205,8 +1188,7 @@ public class NumberPicker extends LinearLayout {
 	 * enabled.
 	 * </p>
 	 * 
-	 * @param wrapSelectorWheel
-	 *            Whether to wrap.
+	 * @param wrapSelectorWheel Whether to wrap.
 	 */
 	public void setWrapSelectorWheel(boolean wrapSelectorWheel) {
 		if (wrapSelectorWheel
@@ -1227,9 +1209,8 @@ public class NumberPicker extends LinearLayout {
 	 * The default value is 300 ms.
 	 * </p>
 	 * 
-	 * @param intervalMillis
-	 *            The speed (in milliseconds) at which the numbers will be
-	 *            incremented and decremented.
+	 * @param intervalMillis The speed (in milliseconds) at which the numbers
+	 * will be incremented and decremented.
 	 */
 	public void setOnLongPressUpdateInterval(long intervalMillis) {
 		mLongPressUpdateInterval = intervalMillis;
@@ -1256,8 +1237,7 @@ public class NumberPicker extends LinearLayout {
 	/**
 	 * Sets the min value of the picker.
 	 * 
-	 * @param minValue
-	 *            The min value.
+	 * @param minValue The min value.
 	 */
 	public void setMinValue(int minValue) {
 		if (mMinValue == minValue) {
@@ -1289,8 +1269,7 @@ public class NumberPicker extends LinearLayout {
 	/**
 	 * Sets the max value of the picker.
 	 * 
-	 * @param maxValue
-	 *            The max value.
+	 * @param maxValue The max value.
 	 */
 	public void setMaxValue(int maxValue) {
 		if (mMaxValue == maxValue) {
@@ -1322,8 +1301,7 @@ public class NumberPicker extends LinearLayout {
 	/**
 	 * Sets the values to be displayed.
 	 * 
-	 * @param displayedValues
-	 *            The displayed values.
+	 * @param displayedValues The displayed values.
 	 */
 	public void setDisplayedValues(String[] displayedValues) {
 		if (mDisplayedValues == displayedValues) {
@@ -1468,10 +1446,8 @@ public class NumberPicker extends LinearLayout {
 	/**
 	 * Makes a measure spec that tries greedily to use the max value.
 	 * 
-	 * @param measureSpec
-	 *            The measure spec.
-	 * @param maxSize
-	 *            The max value for the size.
+	 * @param measureSpec The measure spec.
+	 * @param maxSize The max value for the size.
 	 * @return A measure spec greedily imposing the max size.
 	 */
 	private int makeMeasureSpec(int measureSpec, int maxSize) {
@@ -1498,12 +1474,9 @@ public class NumberPicker extends LinearLayout {
 	 * by a MeasureSpec. Tries to respect the min size, unless a different size
 	 * is imposed by the constraints.
 	 * 
-	 * @param minSize
-	 *            The minimal desired size.
-	 * @param measuredSize
-	 *            The currently measured size.
-	 * @param measureSpec
-	 *            The current measure spec.
+	 * @param minSize The minimal desired size.
+	 * @param measuredSize The currently measured size.
+	 * @param measureSpec The current measure spec.
 	 * @return The resolved size and state.
 	 */
 	private int resolveSizeAndStateRespectingMinSize(int minSize,
@@ -1539,8 +1512,7 @@ public class NumberPicker extends LinearLayout {
 	 * value of mCurrent is wrapped around. Subclasses can override this to
 	 * change the wrapping behavior
 	 * 
-	 * @param current
-	 *            the new value of the NumberPicker
+	 * @param current the new value of the NumberPicker
 	 */
 	private void changeCurrent(int current) {
 		if (mValue == current) {
@@ -1559,8 +1531,7 @@ public class NumberPicker extends LinearLayout {
 	 * Changes the current value by one which is increment or decrement based on
 	 * the passes argument.
 	 * 
-	 * @param increment
-	 *            True to increment, false to decrement.
+	 * @param increment True to increment, false to decrement.
 	 */
 	private void changeCurrentByOne(boolean increment) {
 		if (mFlingable) {
@@ -1735,8 +1706,7 @@ public class NumberPicker extends LinearLayout {
 	 * Show the input controls by making them visible and animating the alpha
 	 * property up/down arrows.
 	 * 
-	 * @param animationDuration
-	 *            The duration of the animation.
+	 * @param animationDuration The duration of the animation.
 	 */
 	private void showInputControls(long animationDuration) {
 		updateIncrementAndDecrementButtonsVisibilityState();
@@ -1748,8 +1718,7 @@ public class NumberPicker extends LinearLayout {
 	/**
 	 * Fade the selector wheel via an animation.
 	 * 
-	 * @param animationDuration
-	 *            The duration of the animation.
+	 * @param animationDuration The duration of the animation.
 	 */
 	private void fadeSelectorWheel(long animationDuration) {
 		mInputText.setVisibility(VISIBLE);
@@ -1901,8 +1870,7 @@ public class NumberPicker extends LinearLayout {
 	/**
 	 * Posts a command for changing the current value by one.
 	 * 
-	 * @param increment
-	 *            Whether to increment or decrement the value.
+	 * @param increment Whether to increment or decrement the value.
 	 */
 	private void postChangeCurrentByOneFromLongPress(boolean increment) {
 		mInputText.clearFocus();
@@ -1942,8 +1910,9 @@ public class NumberPicker extends LinearLayout {
 		} else {
 			for (int i = 0; i < mDisplayedValues.length; i++) {
 				// Don't force the user to type in jan when ja will do
-				value = value.toLowerCase();
-				if (mDisplayedValues[i].toLowerCase().startsWith(value)) {
+				value = value.toLowerCase(Locale.ENGLISH);
+				if (mDisplayedValues[i].toLowerCase(Locale.ENGLISH).startsWith(
+						value)) {
 					return mMinValue + i;
 				}
 			}

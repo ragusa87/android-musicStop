@@ -3,12 +3,17 @@
 
     <item
         android:id="@+id/menuitem_pref"
+        android:icon="@drawable/ic_menu_action_settings"
+        android:showAsAction="ifRoom"
         android:title="@string/menu_pref_label"/>
     <item
+        android:id="@+id/menuitem_about"
+        android:icon="@drawable/ic_menu_action_about"
+        android:showAsAction="ifRoom"
+        android:title="@string/about_label"/>
+    <item
         android:id="@+id/menuitem_test"
+        android:icon="@drawable/ic_menu_action_test"
         android:title="@string/menu_test_label"/>
 
-    <item
-        android:id="@+id/menuitem_about"
-        android:title="@string/menu_about_label"/>
 </menu>

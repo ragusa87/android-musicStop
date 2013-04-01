@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <resources>
 
     <string-array name="prefListArray">
@@ -10,7 +9,6 @@
         <item>Evénement \"Bruyant\"</item>
         <item>Silencieux</item>
     </string-array>
-
     <string-array name="prefListValues">
         <item>1</item>
         <item>2</item>
