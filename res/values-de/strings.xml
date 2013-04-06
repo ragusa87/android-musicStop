@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="prefs_title">Einstellungen</string>
+    <string name="btn_go_txt">Starte den Countdown</string>
+    <string name="txt_intro">Die Musik stoppt wenn der Countdown abgelaufen ist</string>
+    <string name="numberPickerHint">Zeit in Sekunden bevor die Musik stoppt</string>
+    <string name="menu_test_label">Stoppe die Musik jetzt</string>
+    <string name="menu_pref_label">Einstellungen</string>
+
+    <!-- A Propos -->
+    <string name="about_site">Webseite</string>
+    <string name="about_licence">Lizenz</string>
+    <string name="about_label">Über</string>
+    <string name="action_cancel">Countdown beendet!</string>
+    <string name="action_stopped">Musik ist gestoppt!</string>
+    <string name="error_bad_method">Ungültige Methode. Nutze den Standart!</string>
+    <string name="error_bad_kill_time">Ungültige Zeitangabe!</string>
+
+    <!-- notifications -->
+    <!-- Use %duration for the total countdown time -->
+    <!-- Use %remaining for the remaining time -->
+    <!-- The unit is automatically added -->
+    <string name="notify_title">Die Musik stoppt</string>
+    <string name="notify_progress">%remaining verbleibende</string>
+    <string name="notify_start">MusicStop ist für die Dauer von %duration aktiv</string>
+    <string name="notify_test">Sofortiger Stopp</string>
+
+    <!--
+	 Used to convert XXX seconds to something like:
+	 << 2 days 21 minutes 1 second remaining >>
+	 
+	 !! Array's Size MUST BE 4
+    -->
+    <string-array name="unit">
+        <item>Tage</item>
+        <item>Stunde</item>
+        <item>Minute</item>
+        <item>Sekunde</item>
+    </string-array>
+    <string-array name="units">
+        <item>Tage</item>
+        <item>Stunden</item>
+        <item>Minuten</item>
+        <item>Sekunden</item>
+    </string-array>
+
+    <string name="pref_method_title">Methode um Musik zu stoppen</string>
+    <string name="pref_method_pickup">Lieblings-Stopp-Methode</string>
+    <string name="pref_killtime_title">Standart-Zeitdauer</string>
+    <string name="pref_killtime_pickup">Dauer (in Sekunden)</string>
+    <string name="pref_method_fadein">Lautstärke ausblenden</string>
+
+</resources>

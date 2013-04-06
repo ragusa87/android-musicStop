@@ -9,7 +9,7 @@
         <item>Event \"Getting noisy\"</item>
         <item>Mute</item>
     </string-array>
-    <string-array name="prefListValues">
+    <string-array name="prefListValues" translatable="false">
         <item>1</item>
         <item>2</item>
         <item>3</item>
