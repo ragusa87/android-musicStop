@@ -20,8 +20,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
+import android.os.PowerManager;
 
 /**
  * Countdown service used to stop the music
@@ -57,6 +59,10 @@ public class StopService extends Service {
 	// Count the number of timer's call, so we know when the time is up.
 	private int tickCount = 0;
 
+	// WaveLock (acquired on startService, released onDestroy).
+	// Used so the countdown is not canceled when the phone is locked.
+	private PowerManager.WakeLock lock = null;
+
 	/**
 	 * Replace %duration and %remaining with an human readable countdown
 	 * 
@@ -90,6 +96,12 @@ public class StopService extends Service {
 		TimeConverter.loadString(getResources());
 
 		timer = new Timer();
+
+		final PowerManager power = (PowerManager) getSystemService(Context.POWER_SERVICE);
+		Debug.Log.v("Lock.Create");
+		lock = power.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
+				getString(R.string.app_name));
+
 	}
 
 	/**
@@ -127,6 +139,12 @@ public class StopService extends Service {
 	public void onDestroy() {
 		timer.cancel();
 
+		// Relase the lock
+		if (lock != null && lock.isHeld()) {
+			Debug.Log.v("Lock.Release");
+			lock.release();
+		}
+
 		// Hide notification
 		NotificationHelper.hide(getApplicationContext());
 
@@ -141,7 +159,7 @@ public class StopService extends Service {
 		// We started a new Countdown
 		tickCount = 0;
 		remaining = duration;
-		mustRun =true;
+		mustRun = true;
 
 		String notif_start = format(NOTIF_START);
 		if (duration == 0)
@@ -152,6 +170,13 @@ public class StopService extends Service {
 		// Tick every seconds.
 		// When we ticked 'duration' times, we notify the stopActivity
 		timer.schedule(new mainTask(), 0, 1000);
+
+		// Acquire the lock
+
+		if (lock != null && !lock.isHeld()) {
+			Debug.Log.v("Lock.acquire");
+			lock.acquire();
+		}
 
 		// First notification
 		NotificationHelper.setMessage(this, notif_start, format(NOTIF_TITLE),
@@ -164,20 +189,19 @@ public class StopService extends Service {
 	 */
 	private class mainTask extends TimerTask {
 		public void run() {
-			if(!mustRun)
+			if (!mustRun)
 				return;
-			
+
 			Debug.Log.v("TICK!");
 			// Time's UP
 			if (tickCount >= duration) {
 				Debug.Log.v("Timer Stop");
 				this.cancel();
 				terminate();
-				
+
 				// Stop the service
 				stopSelf();
-				
-				
+
 			} else {
 				// Number of remaining seconds before time's up
 				remaining = duration - tickCount;
@@ -208,9 +232,9 @@ public class StopService extends Service {
 		int method = PrefHelper.getPrefMethod(getApplicationContext());
 
 		try {
-			
+
 			// Fade-in
-			if(fadein){
+			if (fadein) {
 				VolumeHelper.muteMediaVolume(getApplicationContext());
 			}
 
@@ -223,11 +247,11 @@ public class StopService extends Service {
 			Debug.Log.e("Cant stop MUSIC !", e);
 		}
 		// Restore volume (except if method is mute)
-		if(fadein && method != 6){
+		if (fadein && method != 6) {
 			VolumeHelper.sleep(1000);
 			VolumeHelper.setMediaVolume(getApplicationContext(), volume);
 		}
-		
+
 		try {
 			Intent i = new Intent(StopActivity.BROADCAST_STOP_ACTION);
 			sendBroadcast(i);
@@ -235,7 +259,6 @@ public class StopService extends Service {
 		} catch (Exception e) {
 			Debug.Log.e("Cant send STOP event", e);
 		}
-
 
 	}
 }
