@@ -22,7 +22,6 @@ This application simulates the "stop" button to stop the music. It should work w
 * Google Music
 * Built-in player (Samsung, HTC,..)
 * Apollo
-* Many More..
 
 ## Enable headset controls ##
 For theses players, edit the settings and check "headsets controls".
@@ -33,7 +32,7 @@ For theses players, edit the settings and check "headsets controls".
 ## Not Working ##
 Theses players have been reported as incompatible with this application. You should try different stop methods to make them work (or use another player). Usually, streaming players are not working (radio/cloud).
 
-* Spotify
+* Spotify Premium (Works using the getting noisy method)
 * Skyrock
 
 If MusicStop doesn't work with your player, try to reboot your phone or change the stop method.

@@ -16,22 +16,50 @@
 
 package com.blackcrowsteam.musicstop;
 
+import android.annotation.TargetApi;
+
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceFragment;
 
 /**
- * This class is used for the preferences, everything come from a XML.
- * 
+ * This class is used for the preferences, everything comes from a XML.
+ * Compatibility fix: http://stackoverflow.com/a/13833320
  * @author laurent Constantin
  * 
  */
-
 public class Preferences extends PreferenceActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		try {
+			getClass().getMethod("getFragmentManager");
+			AddResourceApi11AndGreater();
+		} catch (NoSuchMethodException e) { // Api < 11
+			AddResourceApiLessThan11();
+		}
+
+	}
+
+	@SuppressWarnings("deprecation")
+	protected void AddResourceApiLessThan11() {
 		addPreferencesFromResource(R.xml.preferences);
 	}
 
+	@TargetApi(11)
+	protected void AddResourceApi11AndGreater() {
+		getFragmentManager().beginTransaction()
+				.replace(android.R.id.content, new MyPreferenceFragment())
+				.commit();
+	}
+
+	@TargetApi(11)
+	public static class MyPreferenceFragment extends PreferenceFragment {
+		@Override
+		public void onCreate(final Bundle savedInstanceState) {
+			super.onCreate(savedInstanceState);
+			addPreferencesFromResource(R.xml.preferences);
+		}
+	}
 }
