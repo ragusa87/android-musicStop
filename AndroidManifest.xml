@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.blackcrowsteam.musicstop"
-    android:versionCode="5"
+    android:versionCode="6"
     android:versionName="1.0.5" >
     <!--  1.0.0 Picker by TextField -->
     <!--  1.0.1 Picker by android-numberpicker -->
@@ -12,7 +12,7 @@
 
     <uses-sdk
         android:minSdkVersion="7"
-        android:targetSdkVersion="17" />
+        android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
@@ -38,7 +38,7 @@
             android:name=".Preferences"
             android:label="@string/prefs_title" >
             <intent-filter>
-                <action android:name=".Preferences" />
+                <action android:name="com.blackcrowsteam.musicstop.preferences" />
                 <category android:name="android.intent.category.PREFERENCE" />
             </intent-filter>
         </activity>
