@@ -62,7 +62,7 @@ public class StopService extends Service {
 	// WaveLock (acquired on startService, released onDestroy).
 	// Used so the countdown is not canceled when the phone is locked.
 	private PowerManager.WakeLock lock = null;
-
+	private NotificationHelper mNotifHelper = null;
 	/**
 	 * Replace %duration and %remaining with an human readable countdown
 	 * 
@@ -146,7 +146,8 @@ public class StopService extends Service {
 		}
 
 		// Hide notification
-		NotificationHelper.hide(getApplicationContext());
+		if(mNotifHelper != null)
+			mNotifHelper.cancel(getApplicationContext());
 
 		super.onDestroy();
 
@@ -160,6 +161,7 @@ public class StopService extends Service {
 		tickCount = 0;
 		remaining = duration;
 		mustRun = true;
+		mNotifHelper = new NotificationHelper();
 
 		String notif_start = format(NOTIF_START);
 		if (duration == 0)
@@ -167,25 +169,27 @@ public class StopService extends Service {
 
 		Debug.Log.v(notif_start);
 
-		// Tick every seconds.
-		// When we ticked 'duration' times, we notify the stopActivity
-		timer.schedule(new mainTask(), 0, 1000);
 
 		// Acquire the lock
-
 		if (lock != null && !lock.isHeld()) {
 			Debug.Log.v("Lock.acquire");
 			lock.acquire();
 		}
 
 		// First notification
-		NotificationHelper.setMessage(this, notif_start, format(NOTIF_TITLE),
+		mNotifHelper.setMessage(this, notif_start,
 				format(NOTIF_PROGRESS));
+		
+		// Tick every seconds.
+		// When we ticked 'duration' times, we notify the stopActivity
+		timer.schedule(new mainTask(), 0, 1000);
+
 
 	}
 
 	/**
-	 * Timer tick every seconds. When we ticked 'tickCount' times, time's up
+	 * Timer tick every seconds. When we ticked 'tickCount' times, time's up.
+	 * I should have used CountDownTimer
 	 */
 	private class mainTask extends TimerTask {
 		public void run() {
@@ -209,8 +213,8 @@ public class StopService extends Service {
 						+ remaining + " ticks remaining");
 
 				// Notify
-				NotificationHelper.setMessage(StopService.this,
-						format(NOTIF_START), format(NOTIF_TITLE),
+				if(mNotifHelper != null)
+				mNotifHelper.setMessage(StopService.this, format(NOTIF_TITLE),
 						format(NOTIF_PROGRESS));
 
 				// Tick

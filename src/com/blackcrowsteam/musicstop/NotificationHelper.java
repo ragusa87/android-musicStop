@@ -30,7 +30,14 @@ import android.content.Intent;
  * @todo Refactor, ugly code there..
  */
 public class NotificationHelper {
-	private static final int NOTIF_ID = 1;
+	private static int currentNotifId = 0;
+	private final int id;
+	private final long time;
+	
+	public NotificationHelper(){
+		id = ++currentNotifId;
+		time = System.currentTimeMillis();
+	}
 
 	// Get a reference to the NotificationManager:
 	private static NotificationManager getManager(Context c) {
@@ -38,31 +45,13 @@ public class NotificationHelper {
 				.getSystemService(Context.NOTIFICATION_SERVICE);
 	}
 
-	// new Notification
-	/*
-	 * private static Notification notificationFactory(CharSequence startMsg) {
-	 * int icon = R.drawable.ic_launcher;
-	 * 
-	 * long when = System.currentTimeMillis();
-	 * 
-	 * 
-	 * return new Notification(icon, startMsg, when); }
-	 */
-
-	/**
-	 * Show Notification
-	 * 
-	 * @param context
-	 *            Application context
-	 * @param startMsg
-	 *            Ticker texte
-	 * @param title
-	 *            Notification title
-	 * @param message
-	 *            Notification Message
-	 */
-	public static void setMessage(Service s, CharSequence startMsg,
-			CharSequence title, CharSequence message) {
+/**
+ * Show notification
+ * @param s Service
+ * @param title title 
+ * @param message message
+ */
+	public void setMessage(Service s, CharSequence title, CharSequence message) {
 
 		Context context = s.getApplicationContext();
 
@@ -72,18 +61,17 @@ public class NotificationHelper {
 		PendingIntent contentIntent = PendingIntent.getActivity(context, 0,
 				notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-		if(startMsg == null || startMsg.equals(""))
-			startMsg = message;
-		
+
 		Notification notif = new NotificationCompat.Builder(context)
 				.setContentTitle(title).setContentText(message)
 				.setContentIntent(contentIntent)
-				.setSmallIcon(R.drawable.ic_launcher).setOngoing(true).build();
-
+				.setSmallIcon(R.drawable.ic_launcher).setOngoing(true)
+				.setWhen(time)
+				.build();
 		
 		// Pass the Notification to the NotificationManager:
-		getManager(context).notify(NOTIF_ID, notif);
-		s.startForeground(NOTIF_ID, notif);
+		getManager(context).notify(id, notif);
+		s.startForeground(id, notif);
 
 	}
 
@@ -93,8 +81,8 @@ public class NotificationHelper {
 	 * @param context
 	 *            Application context
 	 */
-	public static void hide(Context context) {
-		getManager(context).cancel(NOTIF_ID);
+	public void cancel(Context context) {
+		getManager(context).cancel(id);
 	}
 
 }
