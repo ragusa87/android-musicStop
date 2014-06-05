@@ -8,7 +8,7 @@
     <!--  1.0.2 Bugfix ? -->
     <!--  1.0.3 Mute, About url, SingleTaskActivity-->
     <!--  1.0.4 ActionBar Support + German -->
-    <!--  1.0.5 Add Wavelock -->
+    <!--  1.0.5 Add Wavelock and KitKat Support -->
 
     <uses-sdk
         android:minSdkVersion="7"
