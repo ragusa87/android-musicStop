@@ -18,6 +18,7 @@ package com.blackcrowsteam.musicstop;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.IBinder;
 import android.os.SystemClock;
 import android.view.KeyEvent;
 
@@ -36,21 +37,43 @@ import android.view.KeyEvent;
  * 
  */
 public class StopHelper {
-
-	private static void sendKey(Context c, int action, int code) {
+	/**
+	 * Create and send a KeyEvent through the AudioService, failback to a simple
+	 * intent broadcast if necessary.On KitKat, the event should be send by the
+	 * service, otherwise it's not working with SELinux enforced mode.
+	 * 
+	 * @param c
+	 *            Context
+	 * @param action
+	 *            KeyEvent.ACTION_*
+	 * @param keycode
+	 *            KeyEvent.KEYCODE_*
+	 */
+	private static void sendKey(Context c, int action, int keycode) {
 		long eventtime = SystemClock.uptimeMillis();
-		Intent downIntent = new Intent(Intent.ACTION_MEDIA_BUTTON, null);
-		KeyEvent downEvent = new KeyEvent(eventtime, eventtime, action, code, 0);
+		KeyEvent keyEvent = new KeyEvent(eventtime, eventtime, action, keycode,
+				0);
 
-		downIntent.putExtra(Intent.EXTRA_KEY_EVENT, downEvent);
-
-		c.sendOrderedBroadcast(downIntent, null);
+		if (!sendMediaKeyEventViaAudioService(keyEvent)) {
+			Intent downIntent = new Intent(Intent.ACTION_MEDIA_BUTTON, null);
+			downIntent.putExtra(Intent.EXTRA_KEY_EVENT, keyEvent);
+			c.sendOrderedBroadcast(downIntent, null);
+		}
 
 	}
 
-	private static void sendKey(Context c, int code) {
-		sendKey(c, KeyEvent.ACTION_DOWN, code);
-		sendKey(c, KeyEvent.ACTION_UP, code);
+	/**
+	 * Send two KeyEvent, one with Action_down and then one with Action_up
+	 * 
+	 * @param c
+	 *            Context
+	 * @param keyCode
+	 *            See KeyEvent.KEYCODE_
+	 */
+	private static void sendKey(Context c, int keyCode) {
+
+		sendKey(c, KeyEvent.ACTION_DOWN, keyCode);
+		sendKey(c, KeyEvent.ACTION_UP, keyCode);
 	}
 
 	public static void sendStopKey(Context c) {
@@ -61,6 +84,14 @@ public class StopHelper {
 		sendKey(c, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE);
 	}
 
+	/**
+	 * Send a AudioManager.ACTION_AUDIO_BECOMING_NOISY event. This event can
+	 * only be send by the system and is blocked by SELinux since Android 4.3
+	 * 
+	 * @param c
+	 *            Context
+	 */
+	@Deprecated
 	public static void audioBecomingNoisy(Context c) {
 		Intent i = new Intent();
 		i.setAction(android.media.AudioManager.ACTION_AUDIO_BECOMING_NOISY);
@@ -107,11 +138,12 @@ public class StopHelper {
 			StopHelper.audioBecomingNoisy(c);
 			break;
 		case 6: // Mute
-			VolumeHelper.setMediaVolume(c,0);
+			VolumeHelper.setMediaVolume(c, 0);
 			break;
 		}
 		return true;
 	}
+
 	/**
 	 * Simulation of a handset plug-out and plug-in Useful for songbird
 	 */
@@ -128,5 +160,80 @@ public class StopHelper {
 		StopHelper.changeHeadSetState(c, "Simulated-Headset", true);
 
 		StopHelper.changeHeadSetState(c, "Simulated-Headset", false);
+	}
+
+	/**
+	 * Send a key event using audioService.dispatchMediaKeyEvent(keyEvent) using
+	 * reflection.
+	 * 
+	 * @param keyEvent
+	 * @return true on success, false otherwise
+	 */
+	public static boolean sendMediaKeyEventViaAudioService(KeyEvent keyEvent) {
+		return sendMediaKeyEventViaAudioService(keyEvent,
+				"dispatchMediaKeyEvent");
+	}
+
+	/**
+	 * Send a key event using
+	 * audioService.dispatchMediaKeyEventUnderWakelock(keyEvent) using
+	 * reflection.
+	 * 
+	 * @param keyEvent
+	 * @return true on success, false otherwise
+	 */
+	public static boolean sendMediaKeyEventViaAudioServiceUnderWakelock(
+			KeyEvent keyEvent) {
+		return sendMediaKeyEventViaAudioService(keyEvent,
+				"dispatchMediaKeyEventUnderWakelock");
+	}
+
+	/**
+	 * Send a key event using audioService.dispatchMediaKeyEvent OR
+	 * audioService.dispatchMediaKeyEventUnderWakelock(keyEvent) using
+	 * reflection.
+	 * 
+	 * Source: http://stackoverflow.com/questions/12573442/
+	 * is-google-play-music-hogging-all-action-media-button-intents
+	 * 
+	 * @param keyEvent
+	 * @param method
+	 *            dispatchMediaKeyEvent or dispatchMediaKeyEventUnderWakelock
+	 * @return true on success, false otherwise
+	 */
+	private static boolean sendMediaKeyEventViaAudioService(KeyEvent keyEvent,
+			String method) {
+		/*
+		 * Attempt to execute the following with reflection.
+		 * 
+		 * [Code] IAudioService audioService =
+		 * IAudioService.Stub.asInterface(b);
+		 * audioService.dispatchMediaKeyEvent(keyEvent);
+		 */
+		try {
+
+			// Get binder from ServiceManager.checkService(String)
+			IBinder iBinder = (IBinder) Class
+					.forName("android.os.ServiceManager")
+					.getDeclaredMethod("checkService", String.class)
+					.invoke(null, Context.AUDIO_SERVICE);
+
+			// get audioService from IAudioService.Stub.asInterface(IBinder)
+			Object audioService = Class
+					.forName("android.media.IAudioService$Stub")
+					.getDeclaredMethod("asInterface", IBinder.class)
+					.invoke(null, iBinder);
+
+			// Dispatch keyEvent using
+			// IAudioService.dispatchMediaKeyEvent(KeyEvent) or
+			// dispatchMediaKeyEventUnderWakelock
+			Class.forName("android.media.IAudioService")
+					.getDeclaredMethod(method, KeyEvent.class)
+					.invoke(audioService, keyEvent);
+			return true;
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			return false;
+		}
 	}
 }
