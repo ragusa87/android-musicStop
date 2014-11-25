@@ -16,9 +16,11 @@
 
 package com.blackcrowsteam.musicstop;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
-import android.os.IBinder;
+import android.media.AudioManager;
+import android.os.Build;
 import android.os.SystemClock;
 import android.view.KeyEvent;
 
@@ -54,7 +56,8 @@ public class StopHelper {
 		KeyEvent keyEvent = new KeyEvent(eventtime, eventtime, action, keycode,
 				0);
 
-		if (!sendMediaKeyEventViaAudioService(keyEvent)) {
+		if (!sendMediaKeyEventViaAudioService(keyEvent, c)) {
+
 			Intent downIntent = new Intent(Intent.ACTION_MEDIA_BUTTON, null);
 			downIntent.putExtra(Intent.EXTRA_KEY_EVENT, keyEvent);
 			c.sendOrderedBroadcast(downIntent, null);
@@ -163,37 +166,9 @@ public class StopHelper {
 	}
 
 	/**
-	 * Send a key event using audioService.dispatchMediaKeyEvent(keyEvent) using
-	 * reflection.
-	 * 
-	 * @param keyEvent
-	 * @return true on success, false otherwise
-	 */
-	public static boolean sendMediaKeyEventViaAudioService(KeyEvent keyEvent) {
-		return sendMediaKeyEventViaAudioService(keyEvent,
-				"dispatchMediaKeyEvent");
-	}
-
-	/**
-	 * Send a key event using
-	 * audioService.dispatchMediaKeyEventUnderWakelock(keyEvent) using
-	 * reflection.
-	 * 
-	 * @param keyEvent
-	 * @return true on success, false otherwise
-	 */
-	public static boolean sendMediaKeyEventViaAudioServiceUnderWakelock(
-			KeyEvent keyEvent) {
-		return sendMediaKeyEventViaAudioService(keyEvent,
-				"dispatchMediaKeyEventUnderWakelock");
-	}
-
-	/**
-	 * Send a key event using audioService.dispatchMediaKeyEvent OR
-	 * audioService.dispatchMediaKeyEventUnderWakelock(keyEvent) using
-	 * reflection.
-	 * 
-	 * Source: http://stackoverflow.com/questions/12573442/
+	 * Send a key event using audioService.dispatchMediaKeyEvent
+	 * Reflection is not used anymore as it didn't work on Lollipop (probably due to ART)
+	 * See: http://stackoverflow.com/questions/12573442/
 	 * is-google-play-music-hogging-all-action-media-button-intents
 	 * 
 	 * @param keyEvent
@@ -201,39 +176,15 @@ public class StopHelper {
 	 *            dispatchMediaKeyEvent or dispatchMediaKeyEventUnderWakelock
 	 * @return true on success, false otherwise
 	 */
+	@TargetApi(Build.VERSION_CODES.KITKAT)
 	private static boolean sendMediaKeyEventViaAudioService(KeyEvent keyEvent,
-			String method) {
-		/*
-		 * Attempt to execute the following with reflection.
-		 * 
-		 * [Code] IAudioService audioService =
-		 * IAudioService.Stub.asInterface(b);
-		 * audioService.dispatchMediaKeyEvent(keyEvent);
-		 */
-		try {
-
-			// Get binder from ServiceManager.checkService(String)
-			IBinder iBinder = (IBinder) Class
-					.forName("android.os.ServiceManager")
-					.getDeclaredMethod("checkService", String.class)
-					.invoke(null, Context.AUDIO_SERVICE);
-
-			// get audioService from IAudioService.Stub.asInterface(IBinder)
-			Object audioService = Class
-					.forName("android.media.IAudioService$Stub")
-					.getDeclaredMethod("asInterface", IBinder.class)
-					.invoke(null, iBinder);
-
-			// Dispatch keyEvent using
-			// IAudioService.dispatchMediaKeyEvent(KeyEvent) or
-			// dispatchMediaKeyEventUnderWakelock
-			Class.forName("android.media.IAudioService")
-					.getDeclaredMethod(method, KeyEvent.class)
-					.invoke(audioService, keyEvent);
+			Context c) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			AudioManager audioManager = (AudioManager) c
+					.getSystemService(Context.AUDIO_SERVICE);
+				audioManager.dispatchMediaKeyEvent(keyEvent);
 			return true;
-		} catch (Exception e1) {
-			e1.printStackTrace();
-			return false;
 		}
+		return false;
 	}
 }
