@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="circle" type="color">#FFF</item>
+    <item name="hightlight" type="color">#80cbc4</item>
+</resources>

@@ -1,0 +1,8 @@
+<resources>
+    <string name="action_about">À Propos</string>
+    <string name="notify_title">Music Stop</string>
+    <string name="notify_progress">La musique s\'arrêtera %remaining</string>
+    <string name="notify_stopping">Arrêt en cours</string>
+    <string name="about_licence">Licences</string>
+    <string name="about_site">Site web</string>
+</resources>

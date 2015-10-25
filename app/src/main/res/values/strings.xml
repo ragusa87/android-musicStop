@@ -1,0 +1,26 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name" translatable="false">Music Stop</string>
+    <string name="app_author" translatable="false">Laurent Constantin</string>
+    <string name="action_about">About</string>
+
+    <!-- Formatted stopwatch time -->
+    <string-array name="stopwatch_format_set" translatable="false">
+        <item> <!-- < 1m -->
+            <xliff:g id="S">%3$02d</xliff:g><xliff:g id="second_separator">S</xliff:g>
+        </item>
+        <item> <!-- < 1h -->
+            <xliff:g id="M">%2$02d</xliff:g><xliff:g id="minute_separator">M</xliff:g><xliff:g id="S">%3$02d</xliff:g>
+        </item>
+        <item> <!-- > 1h  -->
+            <xliff:g id="H">%1$d</xliff:g><xliff:g id="hours_separator">H</xliff:g><xliff:g id="M">%2$02d</xliff:g>
+        </item>
+    </string-array>
+    <string name="notify_title">Music Stop</string>
+    <string name="notify_progress">Music will stop %remaining</string>
+    <string name="notify_stopping">Stopping music</string>
+    <string name="about_site">Website</string>
+    <string name="about_site_url" translatable="false">https://github.com/ragusa87/android-musicStop/</string>
+    <!-- app name + app_version -->
+    <string name="about_title" formatted="false" translatable="false">%s - %s</string>
+    <string name="about_licence">Licences</string>
+</resources>

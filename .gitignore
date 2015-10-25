@@ -1,11 +1,6 @@
-proguard-project.txt
-project.properties
-gen/*
-bin/*
-lint.xml
+/.gradle
+/local.properties
+/.idea
 .DS_Store
-./*/.DS_Store
-./*/*.DS_Store
-.settings/
-/ant.properties
-libs/*
+/gradle
+/build
