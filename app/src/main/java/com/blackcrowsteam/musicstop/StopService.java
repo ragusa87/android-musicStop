@@ -18,12 +18,16 @@
 
 package com.blackcrowsteam.musicstop;
 
+import android.Manifest;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.PowerManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import com.blackcrowsteam.musicstop.helpers.Debug;
@@ -88,7 +92,12 @@ public class StopService extends Service {
         super.onCreate();
         final PowerManager power = (PowerManager) getSystemService(Context.POWER_SERVICE);
         Debug.Log.v("Lock.Create");
-        mSleepLock = power.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, getString(R.string.app_name));
+        final int hasPerm = ContextCompat.checkSelfPermission(this, Manifest.permission.WAKE_LOCK);
+        if (hasPerm == PackageManager.PERMISSION_GRANTED) {
+            mSleepLock = power.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, getString(R.string.app_name));
+        } else {
+            mSleepLock = null;
+        }
 
     }
 
@@ -110,6 +119,10 @@ public class StopService extends Service {
         super.onStartCommand(intent, flags, startId);
 
         // Get the duration
+        if (intent == null || intent.getExtras() == null) {
+            throw new IllegalStateException("Service must be started with a valid intent");
+        }
+
         Bundle bundle = intent.getExtras();
         this.mTimer = bundle.getParcelable(EXTRA_TIMER);
         if (mTimer == null) {

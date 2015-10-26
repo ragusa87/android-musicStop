@@ -1,12 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:targetApi="21"
     android:width="50dp"
     android:height="50dp"
+    android:viewportWidth="50"
+    app:viewportWidth="50"
     android:viewportHeight="50"
-    android:viewportWidth="50">
+    app:viewportHeight="50">
 
     <path
-        android:fillColor="#FFFFFF"
-        android:pathData="M8.45423,5.77767 L8.58988,44.2226 L42.0952,25.135 Z"
         android:strokeColor="#FFFFFF"
-        android:strokeWidth="1" />
+        app:strokeColor="#FFFFFF"
+        android:fillColor="#FFFFFF"
+        app:fillColor="#FFFFFF"
+        android:strokeWidth="0.90294713"
+        app:strokeWidth="0.90294713"
+        android:pathData="M8.45423,5.77767 L8.58988,44.2226 L42.0952,25.135 Z"
+        app:pathData="M8.45423,5.77767 L8.58988,44.2226 L42.0952,25.135 Z" />
 </vector>

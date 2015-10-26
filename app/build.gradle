@@ -31,15 +31,15 @@ android {
 
     defaultConfig {
         applicationId "com.blackcrowsteam.musicstop"
-        minSdkVersion 21
-        targetSdkVersion 23
+        minSdkVersion 15 // ICS 4.0.3
+        targetSdkVersion 23 // Marshmallow
         // 11 - 1.0.0 Picker by TextField
         // 12 - 1.0.1 Picker by android-numberpicker
         // 13 - 1.0.2 Bugfix ?
         // 14 - 1.0.3 Mute, About url, SingleTaskActivity
         // 15 - 1.0.4 ActionBar Support + German
         // 16 - 1.0.5 Add Wavelock and KitKat Support
-        // 17 - 2.0.0 Restart from scratch for Lollipop
+        // 17 - 2.0.0 Full Rewrite for Lollipop (
         versionCode 17
         versionName "2.0"
     }
@@ -60,6 +60,8 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.code-troopers.betterpickers:library:2.1.0'
+    compile 'com.code-troopers.betterpickers:library:2.1.0' // Api 9+
     compile 'com.android.support:design:23.1.0'
+    compile 'com.bettervectordrawable:lib:0.5' // 14+
+
 }

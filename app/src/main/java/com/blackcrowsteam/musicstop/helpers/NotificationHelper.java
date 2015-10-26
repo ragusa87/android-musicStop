@@ -25,8 +25,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 
+import com.bettervectordrawable.VectorDrawableCompat;
 import com.blackcrowsteam.musicstop.MainActivity;
 import com.blackcrowsteam.musicstop.R;
 
@@ -66,16 +70,22 @@ public class NotificationHelper {
         PendingIntent contentIntent = PendingIntent.getActivity(context, 0,
                 notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        Bitmap icon = BitmapFactory.decodeResource(context.getResources(),
+        Bitmap icon = null;
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+         icon = BitmapFactory.decodeResource(context.getResources(),
                 R.drawable.ic_launcher);
 
-        Notification notification = new NotificationCompat.Builder(context)
+        }
+        final int drawable = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ? R.drawable.ic_launcher : R.mipmap.ic_launcher_compat;
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context)
                 .setContentTitle(title).setContentText(message)
                 .setContentIntent(contentIntent)
-                .setSmallIcon(R.drawable.ic_launcher).setOngoing(true)
-                .setLargeIcon(icon)
-                .setWhen(time)
-                .build();
+                .setSmallIcon(drawable).setOngoing(true)
+                .setWhen(time);
+                if(icon != null){
+                  //  notificationBuilder.setLargeIcon(icon);
+                }
+        Notification notification = notificationBuilder.build();
 
         // Pass the Notification to the NotificationManager:
         getManager(context).notify(id, notification);

@@ -19,6 +19,7 @@ package com.blackcrowsteam.musicstop.views;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.design.widget.FloatingActionButton;
 import android.util.AttributeSet;
 import android.view.View;
@@ -26,6 +27,7 @@ import android.widget.RelativeLayout;
 
 import com.blackcrowsteam.musicstop.R;
 import com.blackcrowsteam.musicstop.Timer;
+import android.annotation.SuppressLint;
 
 /**
  * View to display the circle, the duration text and the buttons
@@ -54,6 +56,9 @@ public class CountDownView extends RelativeLayout {
         init(context);
     }
 
+    /**
+     @SuppressLint("NewApi")
+     */
     public CountDownView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context);
@@ -66,8 +71,13 @@ public class CountDownView extends RelativeLayout {
         mText = (ClockTextView) findViewById(R.id.countdown_text);
         mCircle = (CircleView) findViewById(R.id.countdown_circle);
         mBtn = (FloatingActionButton) findViewById(R.id.countdown_fab);
-        mDrawablePlay = context.getDrawable(R.drawable.play);
-        mDrawableStop = context.getDrawable(R.drawable.stop);
+        if(Build.VERSION.SDK_INT >= 22) {
+            mDrawablePlay = context.getDrawable(R.drawable.play);
+            mDrawableStop = context.getDrawable(R.drawable.stop);
+        }else{
+            mDrawablePlay = context.getResources().getDrawable(R.drawable.play);
+            mDrawableStop = context.getResources().getDrawable(R.drawable.stop);
+        }
     }
 
     public void setOnDurationClick(OnClickListener listener) {

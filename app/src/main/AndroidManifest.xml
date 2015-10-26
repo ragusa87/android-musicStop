@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.blackcrowsteam.musicstop">
-    <!--  1.0.0 Picker by TextField -->
-    <!--  1.0.1 Picker by android-numberpicker -->
-    <!--  1.0.2 Bugfix ? -->
-    <!--  1.0.3 Mute, About url, SingleTaskActivity-->
-    <!--  1.0.4 ActionBar Support + German -->
-    <!--  1.0.5 Add Wavelock and KitKat Support -->
-    <!--  2.0.0 Refactor from scratch for android Lollipop -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <application
         android:allowBackup="true"
         android:allowClearUserData="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@mipmap/ic_launcher_compat"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity

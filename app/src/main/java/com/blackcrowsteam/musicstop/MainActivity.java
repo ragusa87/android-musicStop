@@ -17,20 +17,24 @@
  */
 package com.blackcrowsteam.musicstop;
 
+import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.bettervectordrawable.VectorDrawableCompat;
 import com.blackcrowsteam.musicstop.helpers.AboutDialogHelper;
-import com.blackcrowsteam.musicstop.helpers.Debug;
 import com.blackcrowsteam.musicstop.views.CountDownView;
 import com.codetroopers.betterpickers.hmspicker.HmsPickerBuilder;
 import com.codetroopers.betterpickers.hmspicker.HmsPickerDialogFragment;
@@ -71,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements HmsPickerDialogFr
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        VectorDrawableCompat.enableResourceInterceptionFor(getResources(), R.drawable.play, R.drawable.stop, R.drawable.ic_launcher);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mAbout = new AboutDialogHelper(this);
@@ -115,6 +120,9 @@ public class MainActivity extends AppCompatActivity implements HmsPickerDialogFr
      * Start the countdown service
      */
     private void start() {
+        if (mTimer == null) {
+            throw new RuntimeException("Timer cannot be null");
+        }
         Intent i = new Intent(getApplicationContext(), StopService.class);
         i.putExtra(StopService.EXTRA_TIMER, mTimer);
         startService(i);
@@ -153,13 +161,13 @@ public class MainActivity extends AppCompatActivity implements HmsPickerDialogFr
         registerReceiver(bcr, filter);
         // Load duration
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        mLastDuration = prefs.getLong(DURATION_SAVE_KEY, 0);
+        mLastDuration = prefs.getLong(DURATION_SAVE_KEY, 20 * 60 * 1000);
 
         if (mTimer == null) {
             mTimer = new Timer(mLastDuration);
         }
         refresh();
-
+        handlePermission();
     }
 
     public void onPause() {
@@ -192,5 +200,19 @@ public class MainActivity extends AppCompatActivity implements HmsPickerDialogFr
         return super.onOptionsItemSelected(item);
     }
 
+    public void handlePermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WAKE_LOCK)
+                == PackageManager.PERMISSION_GRANTED) {
+            return;
 
+        }
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                Manifest.permission.WAKE_LOCK)) {
+            // TODO Explain why we need permission
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WAKE_LOCK}, 0
+            );
+        }
+    }
 }
